@@ -45,7 +45,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="border-b-4 bg-muted/80 backdrop-blur">
         <QuizHeader onSettings={onSettings} />
       </div>
       {currentUser && (
