@@ -19,9 +19,9 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
       <QuizHeader onSettings={onSettings} />
       <Button
         variant="ghost"
-        size="sm"
+        size="icon"
         onClick={() => {}}
-        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 p-1"
+        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-10 w-10 p-0.5"
       >
         <img 
           src={qLogo} 
