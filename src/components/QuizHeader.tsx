@@ -50,7 +50,7 @@ const QuizHeader = ({
           <Settings className="h-6 w-6" />
         </Button>
       )}
-      <h1 className="text-center text-4xl font-bold text-primary">
+      <h1 className="text-center text-5xl font-bold text-primary">
         {t.appTitle}
       </h1>
     </header>
