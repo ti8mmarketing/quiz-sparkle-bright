@@ -2,7 +2,7 @@ import { Home, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
-import coinIcon from "@/assets/coin-icon.jpg";
+import coinIcon from "@/assets/coin-icon.png";
 
 interface QuizHeaderProps {
   showHomeButton?: boolean;

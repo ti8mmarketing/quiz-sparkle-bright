@@ -6,7 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
-import coinIcon from "@/assets/coin-icon.jpg";
+import coinIcon from "@/assets/coin-icon.png";
 
 interface StartScreenProps {
   onStart: (difficulty: "easy" | "medium" | "hard") => void;
