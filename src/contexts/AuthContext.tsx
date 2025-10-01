@@ -4,6 +4,7 @@ interface User {
   username: string;
   password: string;
   coins: number;
+  activeTheme?: string;
 }
 
 interface AuthContextType {

@@ -7,6 +7,7 @@ interface ThemeShopContextType {
   activeTheme: ThemeStyle;
   purchaseTheme: (theme: ThemeStyle) => boolean;
   setActiveTheme: (theme: ThemeStyle) => void;
+  resetTheme: () => void;
   getThemePrice: (theme: ThemeStyle) => number;
 }
 
@@ -65,8 +66,14 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
     return themePrices[theme];
   };
 
+  const resetTheme = () => {
+    setActiveThemeState("default");
+    applyTheme("default");
+    localStorage.setItem("quiz-active-theme", "default");
+  };
+
   return (
-    <ThemeShopContext.Provider value={{ purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, getThemePrice }}>
+    <ThemeShopContext.Provider value={{ purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, resetTheme, getThemePrice }}>
       {children}
     </ThemeShopContext.Provider>
   );

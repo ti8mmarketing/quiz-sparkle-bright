@@ -5,6 +5,7 @@ import { ShoppingCart } from "lucide-react";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useThemeShop } from "@/contexts/ThemeShopContext";
 import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
@@ -21,12 +22,14 @@ interface StartScreenProps {
 const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
   const { t } = useLanguage();
   const { currentUser, logout } = useAuth();
+  const { resetTheme } = useThemeShop();
   const imageFilter = useThemeImageFilter();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
+    resetTheme();
     setMenuOpen(false);
   };
 
@@ -96,14 +99,16 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           </div>
         </SheetContent>
       </Sheet>
-      <Button
-        onClick={onShop}
-        variant="ghost"
-        size="icon"
-        className="absolute left-4 bottom-4 text-foreground hover:bg-muted"
-      >
-        <ShoppingCart className="h-6 w-6" />
-      </Button>
+      {currentUser && (
+        <Button
+          onClick={onShop}
+          variant="ghost"
+          size="icon"
+          className="absolute left-4 bottom-4 text-foreground hover:bg-muted"
+        >
+          <ShoppingCart className="h-6 w-6" />
+        </Button>
+      )}
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
         <img 
           src={quizLogo} 
