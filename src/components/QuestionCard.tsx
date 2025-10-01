@@ -35,7 +35,9 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
       }
       onAnswer(false);
     } else {
-      onAnswer(true);
+      // No points if a wrong answer was clicked before
+      const hasWrongAnswers = wrongAnswers.length > 0;
+      onAnswer(!hasWrongAnswers);
       setShowResults(true);
       setTimeout(() => {
         onNext();
