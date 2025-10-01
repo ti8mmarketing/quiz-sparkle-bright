@@ -7,9 +7,11 @@ interface QuestionCardProps {
   question: Question;
   onAnswer: (correct: boolean) => void;
   onNext: () => void;
+  currentQuestion: number;
+  totalQuestions: number;
 }
 
-const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
+const QuestionCard = ({ question, onAnswer, onNext, currentQuestion, totalQuestions }: QuestionCardProps) => {
   const { t } = useLanguage();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [wrongAnswers, setWrongAnswers] = useState<number[]>([]);
@@ -78,7 +80,11 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4">
+    <div className="w-full max-w-2xl mx-auto px-4 relative">
+      <div className="absolute bottom-0 left-4 text-white/80 text-lg font-semibold">
+        {currentQuestion}/{totalQuestions}
+      </div>
+      
       <h2 className="text-2xl font-semibold text-foreground text-center mb-12">
         {question.question}
       </h2>

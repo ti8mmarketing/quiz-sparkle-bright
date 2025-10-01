@@ -17,6 +17,9 @@ export const translations = {
     english: "English",
     french: "Français",
     italian: "Italiano",
+    easy: "Einfach",
+    medium: "Mittel",
+    hard: "Schwer",
   },
   en: {
     appTitle: "Quiz-App",
@@ -34,6 +37,9 @@ export const translations = {
     english: "English",
     french: "Français",
     italian: "Italiano",
+    easy: "Easy",
+    medium: "Medium",
+    hard: "Hard",
   },
   fr: {
     appTitle: "Quiz-App",
@@ -51,6 +57,9 @@ export const translations = {
     english: "English",
     french: "Français",
     italian: "Italiano",
+    easy: "Facile",
+    medium: "Moyen",
+    hard: "Difficile",
   },
   it: {
     appTitle: "Quiz-App",
@@ -68,5 +77,8 @@ export const translations = {
     english: "English",
     french: "Français",
     italian: "Italiano",
+    easy: "Facile",
+    medium: "Medio",
+    hard: "Difficile",
   },
 };

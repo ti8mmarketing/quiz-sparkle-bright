@@ -8,13 +8,19 @@ import QuizHeader from "@/components/QuizHeader";
 import { questions } from "@/data/questions";
 
 type Screen = "start" | "quiz" | "score" | "end" | "settings";
+type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [filteredQuestions, setFilteredQuestions] = useState(questions.filter(q => q.difficulty === "easy"));
 
-  const handleStart = () => {
+  const handleStart = (selectedDifficulty: Difficulty) => {
+    setDifficulty(selectedDifficulty);
+    const filtered = questions.filter(q => q.difficulty === selectedDifficulty);
+    setFilteredQuestions(filtered);
     setCurrentScreen("quiz");
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -27,7 +33,7 @@ const Index = () => {
   };
 
   const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setCurrentScreen("score");
@@ -39,6 +45,8 @@ const Index = () => {
   };
 
   const handleRestart = () => {
+    const filtered = questions.filter(q => q.difficulty === difficulty);
+    setFilteredQuestions(filtered);
     setCurrentScreen("quiz");
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -72,9 +80,11 @@ const Index = () => {
         <QuizHeader showHomeButton onHome={handleHome} onSettings={handleSettings} />
         <div className="flex-1 flex items-center justify-center w-full">
           <QuestionCard
-            question={questions[currentQuestionIndex]}
+            question={filteredQuestions[currentQuestionIndex]}
             onAnswer={handleAnswer}
             onNext={handleNext}
+            currentQuestion={currentQuestionIndex + 1}
+            totalQuestions={filteredQuestions.length}
           />
         </div>
       </div>
@@ -85,7 +95,7 @@ const Index = () => {
     return (
       <ScoreScreen
         score={score}
-        totalQuestions={questions.length}
+        totalQuestions={filteredQuestions.length}
         onNext={handleScoreNext}
         onSettings={handleSettings}
       />
