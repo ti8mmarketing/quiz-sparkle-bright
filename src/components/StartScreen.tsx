@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
+import quizLogo from "@/assets/quiz-logo.png";
 
 interface StartScreenProps {
   onStart: (difficulty: "easy" | "medium" | "hard") => void;
@@ -16,6 +17,7 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
+        <img src={quizLogo} alt="Quiz App Logo" className="w-48 h-48 mb-4" />
         <div className="flex gap-4 mb-4">
           <Button
             onClick={() => setSelectedDifficulty("easy")}
@@ -31,8 +33,8 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
             onClick={() => setSelectedDifficulty("medium")}
             className={`h-12 px-6 text-lg ${
               selectedDifficulty === "medium"
-                ? "bg-[hsl(30,100%,50%)] text-white border-2 border-[hsl(30,100%,50%)]"
-                : "bg-[hsl(30,100%,50%)]/50 text-white"
+                ? "bg-[hsl(30,100%,60%)] text-white border-2 border-[hsl(30,100%,60%)]"
+                : "bg-[hsl(30,100%,60%)]/50 text-white"
             }`}
           >
             {t.medium}
@@ -41,8 +43,8 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
             onClick={() => setSelectedDifficulty("hard")}
             className={`h-12 px-6 text-lg ${
               selectedDifficulty === "hard"
-                ? "bg-destructive text-destructive-foreground border-2 border-destructive"
-                : "bg-destructive/50 text-destructive-foreground"
+                ? "bg-[hsl(0,100%,65%)] text-white border-2 border-[hsl(0,100%,65%)]"
+                : "bg-[hsl(0,100%,65%)]/50 text-white"
             }`}
           >
             {t.hard}
