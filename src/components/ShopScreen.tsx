@@ -25,6 +25,8 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
     { id: "green", name: "Grüner Style", colorClass: "bg-green-500" },
     { id: "orange", name: "Oranger Style", colorClass: "bg-orange-500" },
     { id: "yellow", name: "Gelber Style", colorClass: "bg-yellow-500" },
+    { id: "blue", name: "Blauer Style", colorClass: "bg-blue-500" },
+    { id: "purple", name: "Lila Style", colorClass: "bg-purple-500" },
   ];
 
   const handlePurchase = (theme: ThemeStyle) => {
