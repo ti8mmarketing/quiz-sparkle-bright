@@ -6,6 +6,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
+import coinIcon from "@/assets/coin-icon.jpg";
 
 interface StartScreenProps {
   onStart: (difficulty: "easy" | "medium" | "hard") => void;
@@ -40,7 +41,7 @@ const StartScreen = ({ onStart, onSettings, onNavigateToLogin, onNavigateToSignu
       <QuizHeader onSettings={onSettings} />
       {currentUser && (
         <div className="absolute right-20 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
-          <span>{t.coins}:</span>
+          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain" />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
       )}

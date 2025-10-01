@@ -2,6 +2,7 @@ import { Home, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import coinIcon from "@/assets/coin-icon.jpg";
 
 interface QuizHeaderProps {
   showHomeButton?: boolean;
@@ -33,7 +34,7 @@ const QuizHeader = ({
       )}
       {currentUser && (
         <div className="absolute right-20 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
-          <span>{t.coins}:</span>
+          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain" />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
       )}
