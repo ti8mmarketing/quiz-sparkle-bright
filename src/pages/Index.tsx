@@ -5,11 +5,12 @@ import QuestionCard from "@/components/QuestionCard";
 import ScoreScreen from "@/components/ScoreScreen";
 import EndScreen from "@/components/EndScreen";
 import SettingsScreen from "@/components/SettingsScreen";
+import ShopScreen from "@/components/ShopScreen";
 import QuizHeader from "@/components/QuizHeader";
 import { questions } from "@/data/questions";
 import { useAuth } from "@/contexts/AuthContext";
 
-type Screen = "start" | "quiz" | "score" | "end" | "settings";
+type Screen = "start" | "quiz" | "score" | "end" | "settings" | "shop";
 type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
@@ -74,11 +75,21 @@ const Index = () => {
     setCurrentScreen(previousScreen);
   };
 
+  const handleShop = () => {
+    setPreviousScreen(currentScreen);
+    setCurrentScreen("shop");
+  };
+
+  const handleBackFromShop = () => {
+    setCurrentScreen(previousScreen);
+  };
+
   if (currentScreen === "start") {
     return (
       <StartScreen 
         onStart={handleStart} 
-        onSettings={handleSettings} 
+        onSettings={handleSettings}
+        onShop={handleShop}
         onNavigateToLogin={() => navigate("/login")}
         onNavigateToSignup={() => navigate("/signup")}
       />
@@ -87,6 +98,10 @@ const Index = () => {
 
   if (currentScreen === "settings") {
     return <SettingsScreen onBack={handleBackFromSettings} />;
+  }
+
+  if (currentScreen === "shop") {
+    return <ShopScreen onBack={handleBackFromShop} onSettings={handleSettings} />;
   }
 
   if (currentScreen === "quiz") {

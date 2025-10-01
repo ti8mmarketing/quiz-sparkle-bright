@@ -11,11 +11,12 @@ import coinIcon from "@/assets/coin-icon.png";
 interface StartScreenProps {
   onStart: (difficulty: "easy" | "medium" | "hard") => void;
   onSettings: () => void;
+  onShop: () => void;
   onNavigateToLogin: () => void;
   onNavigateToSignup: () => void;
 }
 
-const StartScreen = ({ onStart, onSettings, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
+const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
   const { t } = useLanguage();
   const { currentUser, logout } = useAuth();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
@@ -91,6 +92,14 @@ const StartScreen = ({ onStart, onSettings, onNavigateToLogin, onNavigateToSignu
           </div>
         </SheetContent>
       </Sheet>
+      <Button
+        onClick={onShop}
+        variant="ghost"
+        size="icon"
+        className="absolute left-4 bottom-4 text-2xl hover:bg-muted transition-all hover:scale-110 h-12 w-12"
+      >
+        🛒
+      </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
         <img src={quizLogo} alt="Quiz App Logo" className="w-80 h-80 mb-4" />
         <div className="flex gap-4 mb-4">
