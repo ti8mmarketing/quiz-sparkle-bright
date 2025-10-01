@@ -2,6 +2,7 @@ import { Home, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import coinIcon from "@/assets/coin-icon.png";
 
 interface QuizHeaderProps {
@@ -19,6 +20,7 @@ const QuizHeader = ({
 }: QuizHeaderProps) => {
   const { t } = useLanguage();
   const { currentUser } = useAuth();
+  const imageFilter = useThemeImageFilter();
   
   return (
     <header className="relative w-full py-6">
@@ -34,7 +36,7 @@ const QuizHeader = ({
       )}
       {currentUser && (
         <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
-          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain" />
+          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain transition-all" style={{ filter: imageFilter }} />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
       )}

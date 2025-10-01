@@ -5,6 +5,7 @@ import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useThemeShop, ThemeStyle } from "@/contexts/ThemeShopContext";
+import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import { toast } from "@/hooks/use-toast";
 import coinIcon from "@/assets/coin-icon.png";
 import { Check } from "lucide-react";
@@ -19,6 +20,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
   const [previewTheme, setPreviewTheme] = useState<ThemeStyle | null>(null);
   const { currentUser, addCoins } = useAuth();
   const { purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, getThemePrice } = useThemeShop();
+  const imageFilter = useThemeImageFilter();
 
   const themes: { id: ThemeStyle; name: string; colorClass: string }[] = [
     { id: "default", name: "Standard Style", colorClass: "bg-blue-600" },
@@ -72,7 +74,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       <QuizHeader onSettings={onSettings} />
       {currentUser && (
         <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
-          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain" />
+          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain transition-all" style={{ filter: imageFilter }} />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
       )}
@@ -115,7 +117,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                   <div className={`h-24 rounded-lg ${theme.colorClass}`}></div>
                   
                   <div className="flex items-center gap-2">
-                    <img src={coinIcon} alt="Coin" className="h-5 w-5 object-contain" />
+                    <img src={coinIcon} alt="Coin" className="h-5 w-5 object-contain transition-all" style={{ filter: imageFilter }} />
                     <span className="text-lg font-bold text-primary">{price}</span>
                   </div>
 
