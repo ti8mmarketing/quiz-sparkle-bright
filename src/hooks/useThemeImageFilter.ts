@@ -8,11 +8,11 @@ export const useThemeImageFilter = () => {
   useEffect(() => {
     const filters: Record<string, string> = {
       default: "hue-rotate(0deg) saturate(1) brightness(1)",
-      pink: "hue-rotate(290deg) saturate(1.5) brightness(1.1)",
-      green: "hue-rotate(100deg) saturate(1.3) brightness(1.05)",
-      orange: "hue-rotate(15deg) saturate(1.4) brightness(1.1)",
-      blue: "hue-rotate(180deg) saturate(1.2) brightness(1.15)",
-      purple: "hue-rotate(260deg) saturate(1.4) brightness(1.1)",
+      pink: "hue-rotate(310deg) saturate(2) brightness(1.2)",
+      green: "hue-rotate(95deg) saturate(1.8) brightness(1.1)",
+      orange: "hue-rotate(10deg) saturate(1.9) brightness(1.2)",
+      blue: "hue-rotate(180deg) saturate(1.6) brightness(1.3)",
+      purple: "hue-rotate(260deg) saturate(1.8) brightness(1.2)",
     };
 
     setFilterStyle(filters[activeTheme] || filters.default);
