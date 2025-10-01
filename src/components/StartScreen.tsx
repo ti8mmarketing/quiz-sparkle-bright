@@ -19,14 +19,14 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
       <QuizHeader onSettings={onSettings} />
       <Button
         variant="ghost"
-        size="icon"
+        size="sm"
         onClick={() => {}}
-        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110"
+        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 p-1"
       >
         <img 
           src={qLogo} 
           alt="Q Logo" 
-          className="h-6 w-6 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
+          className="h-8 w-8 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
         />
       </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
