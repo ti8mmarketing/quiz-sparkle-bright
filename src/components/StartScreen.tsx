@@ -49,8 +49,8 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
         <QuizHeader onSettings={onSettings} />
       </div>
       {currentUser && (
-        <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
-          <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain transition-all" style={{ filter: imageFilter }} />
+        <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-xl">
+          <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
       )}
@@ -59,12 +59,12 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-10 w-10 p-0.5"
+            className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-12 w-12 p-1"
           >
             <img 
               src={qLogo} 
               alt="Q Logo" 
-              className="h-8 w-8 object-contain transition-all"
+              className="h-10 w-10 object-contain transition-all"
               style={{ filter: imageFilter }}
             />
           </Button>
@@ -106,9 +106,9 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           onClick={onShop}
           variant="ghost"
           size="icon"
-          className="absolute left-4 bottom-4 text-foreground hover:bg-muted"
+          className="absolute left-4 bottom-4 text-foreground hover:bg-muted h-12 w-12"
         >
-          <ShoppingCart className="h-6 w-6" />
+          <ShoppingCart className="h-8 w-8" />
         </Button>
       )}
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8 bg-background">
