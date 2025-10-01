@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
+import endLogo from "@/assets/end-logo.png";
 
 interface EndScreenProps {
   onRestart: () => void;
@@ -15,6 +16,11 @@ const EndScreen = ({ onRestart, onHome, onSettings }: EndScreenProps) => {
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
       <div className="flex-1 flex flex-col items-center justify-center gap-6 w-full px-4">
+        <img 
+          src={endLogo} 
+          alt="Quiz App Logo" 
+          className="w-80 h-80 mb-8"
+        />
         <Button
           onClick={onRestart}
           size="lg"
