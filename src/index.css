@@ -140,19 +140,19 @@ All colors MUST be HSL.
   }
 
   .theme-blue {
-    --background: 217 91% 16%;
+    --background: 197 71% 20%;
     --foreground: 0 0% 100%;
-    --primary: 217 91% 60%;
+    --primary: 197 71% 65%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 217 75% 50%;
+    --secondary: 197 60% 55%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 217 80% 25%;
+    --muted: 197 65% 30%;
     --muted-foreground: 0 0% 80%;
-    --accent: 217 91% 70%;
+    --accent: 197 71% 75%;
     --accent-foreground: 0 0% 100%;
-    --border: 217 80% 25%;
-    --input: 217 80% 25%;
-    --ring: 217 91% 60%;
+    --border: 197 65% 30%;
+    --input: 197 65% 30%;
+    --ring: 197 71% 65%;
   }
 
   .theme-purple {

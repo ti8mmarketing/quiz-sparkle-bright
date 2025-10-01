@@ -25,7 +25,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
     { id: "green", name: "Grüner Style", colorClass: "bg-green-500" },
     { id: "orange", name: "Oranger Style", colorClass: "bg-orange-500" },
     { id: "yellow", name: "Gelber Style", colorClass: "bg-yellow-500" },
-    { id: "blue", name: "Blauer Style", colorClass: "bg-blue-500" },
+    { id: "blue", name: "Hellblauer Style", colorClass: "bg-cyan-400" },
     { id: "purple", name: "Lila Style", colorClass: "bg-purple-500" },
   ];
 
@@ -85,7 +85,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       </Button>
       
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 max-w-6xl py-8">
-        <h1 className="text-4xl font-bold text-foreground mb-8">🛒 Theme Shop</h1>
+        <h1 className="text-4xl font-bold text-foreground mb-8">🛒 Design Shop</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full">
           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
