@@ -14,7 +14,7 @@ const EndScreen = ({ onRestart, onHome, onSettings }: EndScreenProps) => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
-      <div className="flex-1 flex flex-col items-center justify-center gap-6 pb-20">
+      <div className="flex-1 flex flex-col items-center justify-center gap-6 w-full px-4">
         <Button
           onClick={onRestart}
           size="lg"
