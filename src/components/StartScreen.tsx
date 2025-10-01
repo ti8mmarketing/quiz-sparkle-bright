@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import quizLogo from "@/assets/quiz-logo.png";
+import qLogo from "@/assets/q-logo.png";
 
 interface StartScreenProps {
   onStart: (difficulty: "easy" | "medium" | "hard") => void;
@@ -16,6 +17,14 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute left-4 top-4 text-foreground hover:bg-muted"
+        disabled
+      >
+        <img src={qLogo} alt="Q Logo" className="h-6 w-6" />
+      </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
         <img src={quizLogo} alt="Quiz App Logo" className="w-80 h-80 mb-4" />
         <div className="flex gap-4 mb-4">

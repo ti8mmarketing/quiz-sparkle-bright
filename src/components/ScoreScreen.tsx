@@ -15,8 +15,8 @@ const ScoreScreen = ({ score, totalQuestions, onNext, onSettings }: ScoreScreenP
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
-      <div className="flex-1 flex flex-col items-center justify-center gap-8 w-full px-4">
-        <div className="text-center">
+      <div className="flex-1 flex flex-col items-center w-full px-4">
+        <div className="text-center mt-20 mb-auto">
           <h2 className="text-3xl font-bold text-foreground mb-4">
             {t.yourScore}
           </h2>
@@ -24,13 +24,15 @@ const ScoreScreen = ({ score, totalQuestions, onNext, onSettings }: ScoreScreenP
             {score} / {totalQuestions}
           </p>
         </div>
-        <Button
-          onClick={onNext}
-          size="lg"
-          className="bg-secondary text-secondary-foreground w-full max-w-md h-14 text-xl"
-        >
-          {t.next}
-        </Button>
+        <div className="mb-20 w-full flex justify-center">
+          <Button
+            onClick={onNext}
+            size="lg"
+            className="bg-secondary text-secondary-foreground w-full max-w-md h-14 text-xl"
+          >
+            {t.next}
+          </Button>
+        </div>
       </div>
     </div>
   );
