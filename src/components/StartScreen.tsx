@@ -13,7 +13,7 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
-      <div className="flex-1 flex items-center justify-center pb-20">
+      <div className="flex-1 flex items-center justify-center w-full px-4">
         <Button
           onClick={onStart}
           size="lg"
