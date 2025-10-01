@@ -12,6 +12,7 @@ type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
+  const [previousScreen, setPreviousScreen] = useState<Screen>("start");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
@@ -59,11 +60,12 @@ const Index = () => {
   };
 
   const handleSettings = () => {
+    setPreviousScreen(currentScreen);
     setCurrentScreen("settings");
   };
 
   const handleBackFromSettings = () => {
-    setCurrentScreen("start");
+    setCurrentScreen(previousScreen);
   };
 
   if (currentScreen === "start") {
