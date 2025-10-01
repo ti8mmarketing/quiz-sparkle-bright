@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-export type ThemeStyle = "default" | "pink" | "green" | "orange" | "yellow" | "blue" | "purple";
+export type ThemeStyle = "default" | "pink" | "green" | "orange" | "blue" | "purple";
 
 interface ThemeShopContextType {
   purchasedThemes: ThemeStyle[];
@@ -17,9 +17,8 @@ const themePrices: Record<ThemeStyle, number> = {
   pink: 10,
   green: 20,
   orange: 30,
-  yellow: 40,
-  blue: 50,
-  purple: 60,
+  blue: 40,
+  purple: 50,
 };
 
 export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
@@ -40,7 +39,7 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
 
   const applyTheme = (theme: ThemeStyle) => {
     const root = document.documentElement;
-    root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-yellow", "theme-blue", "theme-purple");
+    root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple");
     root.classList.add(`theme-${theme}`);
   };
 

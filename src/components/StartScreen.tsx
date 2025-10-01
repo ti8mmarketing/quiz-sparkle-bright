@@ -5,6 +5,7 @@ import { ShoppingCart } from "lucide-react";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
 import coinIcon from "@/assets/coin-icon.png";
@@ -20,6 +21,7 @@ interface StartScreenProps {
 const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
   const { t } = useLanguage();
   const { currentUser, logout } = useAuth();
+  const imageFilter = useThemeImageFilter();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -57,7 +59,8 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
             <img 
               src={qLogo} 
               alt="Q Logo" 
-              className="h-8 w-8 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
+              className="h-8 w-8 object-contain transition-all"
+              style={{ filter: imageFilter }}
             />
           </Button>
         </SheetTrigger>
@@ -102,7 +105,12 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
         <ShoppingCart className="h-6 w-6" />
       </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
-        <img src={quizLogo} alt="Quiz App Logo" className="w-80 h-80 mb-4" />
+        <img 
+          src={quizLogo} 
+          alt="Quiz App Logo" 
+          className="w-80 h-80 mb-4 transition-all"
+          style={{ filter: imageFilter }}
+        />
         <div className="flex gap-4 mb-4">
           <Button
             onClick={() => setSelectedDifficulty("easy")}

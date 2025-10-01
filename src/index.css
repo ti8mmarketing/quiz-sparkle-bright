@@ -123,22 +123,6 @@ All colors MUST be HSL.
     --ring: 28 89% 55%;
   }
 
-  .theme-yellow {
-    --background: 48 89% 16%;
-    --foreground: 0 0% 100%;
-    --primary: 48 89% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 48 75% 45%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 48 80% 25%;
-    --muted-foreground: 0 0% 80%;
-    --accent: 48 89% 65%;
-    --accent-foreground: 0 0% 100%;
-    --border: 48 80% 25%;
-    --input: 48 80% 25%;
-    --ring: 48 89% 55%;
-  }
-
   .theme-blue {
     --background: 197 71% 20%;
     --foreground: 0 0% 100%;

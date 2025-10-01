@@ -21,10 +21,10 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
   const { purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, getThemePrice } = useThemeShop();
 
   const themes: { id: ThemeStyle; name: string; colorClass: string }[] = [
+    { id: "default", name: "Standard Style", colorClass: "bg-blue-600" },
     { id: "pink", name: "Pink Style", colorClass: "bg-pink-500" },
     { id: "green", name: "Grüner Style", colorClass: "bg-green-500" },
     { id: "orange", name: "Oranger Style", colorClass: "bg-orange-500" },
-    { id: "yellow", name: "Gelber Style", colorClass: "bg-yellow-500" },
     { id: "blue", name: "Hellblauer Style", colorClass: "bg-cyan-400" },
     { id: "purple", name: "Lila Style", colorClass: "bg-purple-500" },
   ];
