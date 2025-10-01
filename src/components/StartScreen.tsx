@@ -40,7 +40,7 @@ const StartScreen = ({ onStart, onSettings, onNavigateToLogin, onNavigateToSignu
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
       {currentUser && (
-        <div className="absolute right-20 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
+        <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
           <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain" />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
