@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StartScreen from "@/components/StartScreen";
 import QuestionCard from "@/components/QuestionCard";
 import ScoreScreen from "@/components/ScoreScreen";
@@ -13,6 +14,7 @@ type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
   const { addCoins } = useAuth();
+  const navigate = useNavigate();
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
   const [previousScreen, setPreviousScreen] = useState<Screen>("start");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -73,7 +75,14 @@ const Index = () => {
   };
 
   if (currentScreen === "start") {
-    return <StartScreen onStart={handleStart} onSettings={handleSettings} />;
+    return (
+      <StartScreen 
+        onStart={handleStart} 
+        onSettings={handleSettings} 
+        onNavigateToLogin={() => navigate("/login")}
+        onNavigateToSignup={() => navigate("/signup")}
+      />
+    );
   }
 
   if (currentScreen === "settings") {

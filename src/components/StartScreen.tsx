@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import QuizHeader from "./QuizHeader";
@@ -11,18 +10,29 @@ import qLogo from "@/assets/q-logo.png";
 interface StartScreenProps {
   onStart: (difficulty: "easy" | "medium" | "hard") => void;
   onSettings: () => void;
+  onNavigateToLogin: () => void;
+  onNavigateToSignup: () => void;
 }
 
-const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
+const StartScreen = ({ onStart, onSettings, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
   const { t } = useLanguage();
   const { currentUser, logout } = useAuth();
-  const navigate = useNavigate();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
     setMenuOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    setMenuOpen(false);
+    onNavigateToLogin();
+  };
+
+  const handleSignupClick = () => {
+    setMenuOpen(false);
+    onNavigateToSignup();
   };
   
   return (
@@ -56,13 +66,13 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
             {!currentUser ? (
               <>
                 <Button 
-                  onClick={() => { navigate("/login"); setMenuOpen(false); }}
+                  onClick={handleLoginClick}
                   className="w-full bg-secondary text-secondary-foreground"
                 >
                   {t.login}
                 </Button>
                 <Button 
-                  onClick={() => { navigate("/signup"); setMenuOpen(false); }}
+                  onClick={handleSignupClick}
                   className="w-full bg-secondary text-secondary-foreground"
                 >
                   {t.signup}
