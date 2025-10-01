@@ -7,12 +7,12 @@ export const useThemeImageFilter = () => {
 
   useEffect(() => {
     const filters: Record<string, string> = {
-      default: "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(200deg) brightness(118%) contrast(119%)",
-      pink: "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(310deg) brightness(118%) contrast(119%)",
-      green: "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(95deg) brightness(118%) contrast(119%)",
-      orange: "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(10deg) brightness(118%) contrast(119%)",
-      blue: "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(175deg) brightness(118%) contrast(119%)",
-      purple: "brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(260deg) brightness(118%) contrast(119%)",
+      default: "hue-rotate(0deg)",
+      pink: "hue-rotate(108deg) saturate(1.2)",
+      green: "hue-rotate(-105deg) saturate(1.2)",
+      orange: "hue-rotate(-190deg) saturate(1.2)",
+      blue: "hue-rotate(-20deg) saturate(1.1)",
+      purple: "hue-rotate(60deg) saturate(1.2)",
     };
 
     setFilterStyle(filters[activeTheme] || filters.default);
