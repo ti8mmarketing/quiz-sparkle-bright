@@ -75,6 +75,71 @@ All colors MUST be HSL.
     --ring: 212 87% 55%;
   }
 
+  .light.theme-pink {
+    --background: 0 0% 100%;
+    --foreground: 330 81% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 330 81% 10%;
+    --primary: 330 81% 60%;
+    --muted: 330 20% 96%;
+    --muted-foreground: 330 30% 40%;
+    --border: 330 20% 91%;
+    --input: 330 20% 91%;
+    --ring: 330 81% 60%;
+  }
+
+  .light.theme-green {
+    --background: 0 0% 100%;
+    --foreground: 142 76% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 142 76% 10%;
+    --primary: 142 71% 55%;
+    --muted: 142 20% 96%;
+    --muted-foreground: 142 30% 40%;
+    --border: 142 20% 91%;
+    --input: 142 20% 91%;
+    --ring: 142 71% 55%;
+  }
+
+  .light.theme-orange {
+    --background: 0 0% 100%;
+    --foreground: 28 89% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 28 89% 10%;
+    --primary: 28 89% 55%;
+    --muted: 28 20% 96%;
+    --muted-foreground: 28 30% 40%;
+    --border: 28 20% 91%;
+    --input: 28 20% 91%;
+    --ring: 28 89% 55%;
+  }
+
+  .light.theme-blue {
+    --background: 0 0% 100%;
+    --foreground: 197 71% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 197 71% 10%;
+    --primary: 197 71% 65%;
+    --muted: 197 20% 96%;
+    --muted-foreground: 197 30% 40%;
+    --border: 197 20% 91%;
+    --input: 197 20% 91%;
+    --ring: 197 71% 65%;
+  }
+
+  .light.theme-purple {
+    --background: 0 0% 100%;
+    --foreground: 271 81% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 271 81% 10%;
+    --primary: 271 81% 60%;
+    --muted: 271 20% 96%;
+    --muted-foreground: 271 30% 40%;
+    --border: 271 20% 91%;
+    --input: 271 20% 91%;
+    --ring: 271 81% 60%;
+  }
+
   .theme-pink {
     --background: 330 81% 10%;
     --foreground: 0 0% 100%;
