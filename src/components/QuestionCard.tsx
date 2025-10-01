@@ -52,8 +52,8 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
       return "bg-success text-success-foreground";
     }
 
-    // Show wrong answers in red when skipped
-    if (isSkipped && index !== question.correctAnswer) {
+    // Show all wrong answers in red when results are shown
+    if (showResults && index !== question.correctAnswer) {
       return "bg-destructive text-destructive-foreground";
     }
 
@@ -62,8 +62,8 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
       return "bg-destructive text-destructive-foreground";
     }
 
-    // Default button color
-    return "bg-secondary text-secondary-foreground hover:bg-secondary/90";
+    // Default button color (no hover effect)
+    return "bg-secondary text-secondary-foreground";
   };
 
   return (
