@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { ShoppingCart } from "lucide-react";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -96,9 +97,9 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
         onClick={onShop}
         variant="ghost"
         size="icon"
-        className="absolute left-4 bottom-4 text-2xl hover:bg-muted transition-all hover:scale-110 h-12 w-12"
+        className="absolute left-4 bottom-4 text-foreground hover:bg-muted"
       >
-        🛒
+        <ShoppingCart className="h-6 w-6" />
       </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
         <img src={quizLogo} alt="Quiz App Logo" className="w-80 h-80 mb-4" />
