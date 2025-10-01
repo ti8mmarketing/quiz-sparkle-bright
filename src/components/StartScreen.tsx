@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
 
@@ -12,23 +15,71 @@ interface StartScreenProps {
 
 const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
   const { t } = useLanguage();
+  const { currentUser, logout } = useAuth();
+  const navigate = useNavigate();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    logout();
+    setMenuOpen(false);
+  };
   
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => {}}
-        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-10 w-10 p-0.5"
-      >
-        <img 
-          src={qLogo} 
-          alt="Q Logo" 
-          className="h-8 w-8 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
-        />
-      </Button>
+      {currentUser && (
+        <div className="absolute right-20 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
+          <span>{t.coins}:</span>
+          <span className="text-primary">{currentUser.coins}</span>
+        </div>
+      )}
+      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+        <SheetTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-10 w-10 p-0.5"
+          >
+            <img 
+              src={qLogo} 
+              alt="Q Logo" 
+              className="h-8 w-8 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
+            />
+          </Button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-64">
+          <SheetHeader>
+            <SheetTitle>{t.menu}</SheetTitle>
+          </SheetHeader>
+          <div className="mt-8 flex flex-col gap-4">
+            {!currentUser ? (
+              <>
+                <Button 
+                  onClick={() => { navigate("/login"); setMenuOpen(false); }}
+                  className="w-full bg-secondary text-secondary-foreground"
+                >
+                  {t.login}
+                </Button>
+                <Button 
+                  onClick={() => { navigate("/signup"); setMenuOpen(false); }}
+                  className="w-full bg-secondary text-secondary-foreground"
+                >
+                  {t.signup}
+                </Button>
+              </>
+            ) : (
+              <Button 
+                onClick={handleLogout}
+                variant="destructive"
+                className="w-full"
+              >
+                {t.logout}
+              </Button>
+            )}
+          </div>
+        </SheetContent>
+      </Sheet>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
         <img src={quizLogo} alt="Quiz App Logo" className="w-80 h-80 mb-4" />
         <div className="flex gap-4 mb-4">

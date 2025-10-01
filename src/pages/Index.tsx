@@ -6,11 +6,13 @@ import EndScreen from "@/components/EndScreen";
 import SettingsScreen from "@/components/SettingsScreen";
 import QuizHeader from "@/components/QuizHeader";
 import { questions } from "@/data/questions";
+import { useAuth } from "@/contexts/AuthContext";
 
 type Screen = "start" | "quiz" | "score" | "end" | "settings";
 type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
+  const { addCoins } = useAuth();
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
   const [previousScreen, setPreviousScreen] = useState<Screen>("start");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -30,6 +32,8 @@ const Index = () => {
   const handleAnswer = (correct: boolean) => {
     if (correct) {
       setScore(score + 1);
+      const coinMultiplier = difficulty === "easy" ? 1 : difficulty === "medium" ? 2 : 3;
+      addCoins(coinMultiplier);
     }
   };
 

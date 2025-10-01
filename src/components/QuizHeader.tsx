@@ -1,6 +1,7 @@
 import { Home, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface QuizHeaderProps {
   showHomeButton?: boolean;
@@ -16,6 +17,7 @@ const QuizHeader = ({
   onSettings
 }: QuizHeaderProps) => {
   const { t } = useLanguage();
+  const { currentUser } = useAuth();
   
   return (
     <header className="relative w-full py-6">
@@ -28,6 +30,12 @@ const QuizHeader = ({
         >
           <Home className="h-6 w-6" />
         </Button>
+      )}
+      {currentUser && (
+        <div className="absolute right-20 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
+          <span>{t.coins}:</span>
+          <span className="text-primary">{currentUser.coins}</span>
+        </div>
       )}
       {showSettingsButton && (
         <Button
