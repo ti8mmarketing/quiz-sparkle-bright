@@ -20,10 +20,14 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-4 text-foreground hover:bg-muted"
-        disabled
+        onClick={() => {}}
+        className="absolute left-4 top-4 hover:bg-muted p-2 transition-all hover:scale-110"
       >
-        <img src={qLogo} alt="Q Logo" className="h-6 w-6" />
+        <img 
+          src={qLogo} 
+          alt="Q Logo" 
+          className="h-12 w-12 drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
+        />
       </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
         <img src={quizLogo} alt="Quiz App Logo" className="w-80 h-80 mb-4" />
