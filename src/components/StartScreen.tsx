@@ -44,8 +44,10 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   };
   
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center">
-      <QuizHeader onSettings={onSettings} />
+    <div className="min-h-screen bg-background flex flex-col">
+      <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <QuizHeader onSettings={onSettings} />
+      </div>
       {currentUser && (
         <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-lg">
           <img src={coinIcon} alt="Coin" className="h-6 w-6 object-contain transition-all" style={{ filter: imageFilter }} />
@@ -109,7 +111,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <ShoppingCart className="h-6 w-6" />
         </Button>
       )}
-      <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
+      <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8 bg-background">
         <img 
           src={quizLogo} 
           alt="Quiz App Logo" 
