@@ -81,7 +81,7 @@ const QuestionCard = ({ question, onAnswer, onNext, currentQuestion, totalQuesti
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 relative">
-      <div className="absolute bottom-0 left-4 text-white/80 text-lg font-semibold">
+      <div className="absolute bottom-0 right-4 text-white/80 text-lg font-semibold">
         {currentQuestion}/{totalQuestions}
       </div>
       

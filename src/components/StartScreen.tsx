@@ -33,8 +33,8 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
             onClick={() => setSelectedDifficulty("medium")}
             className={`h-12 px-6 text-lg ${
               selectedDifficulty === "medium"
-                ? "bg-[hsl(38,91%,55%)] text-white border-2 border-[hsl(38,91%,55%)]"
-                : "bg-[hsl(38,91%,55%)]/50 text-white"
+                ? "bg-[hsl(38,91%,65%)] text-white border-2 border-[hsl(38,91%,65%)]"
+                : "bg-[hsl(38,91%,65%)]/50 text-white"
             }`}
           >
             {t.medium}
@@ -43,8 +43,8 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
             onClick={() => setSelectedDifficulty("hard")}
             className={`h-12 px-6 text-lg ${
               selectedDifficulty === "hard"
-                ? "bg-[hsl(356,98%,41%)] text-white border-2 border-[hsl(356,98%,41%)]"
-                : "bg-[hsl(356,98%,41%)]/50 text-white"
+                ? "bg-[hsl(356,98%,55%)] text-white border-2 border-[hsl(356,98%,55%)]"
+                : "bg-[hsl(356,98%,55%)]/50 text-white"
             }`}
           >
             {t.hard}
