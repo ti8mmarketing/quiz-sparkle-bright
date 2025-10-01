@@ -26,7 +26,7 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
         <img 
           src={qLogo} 
           alt="Q Logo" 
-          className="h-9 w-9 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
+          className="h-6 w-6 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]" 
         />
       </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8">
