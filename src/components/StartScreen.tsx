@@ -21,7 +21,7 @@ const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
         variant="ghost"
         size="icon"
         onClick={() => {}}
-        className="absolute left-4 top-4 hover:bg-muted transition-all hover:scale-110"
+        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110"
       >
         <img 
           src={qLogo} 
