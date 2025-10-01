@@ -1,20 +1,24 @@
 import { Button } from "@/components/ui/button";
 import QuizHeader from "./QuizHeader";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ScoreScreenProps {
   score: number;
   totalQuestions: number;
   onNext: () => void;
+  onSettings: () => void;
 }
 
-const ScoreScreen = ({ score, totalQuestions, onNext }: ScoreScreenProps) => {
+const ScoreScreen = ({ score, totalQuestions, onNext, onSettings }: ScoreScreenProps) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
-      <QuizHeader />
-      <div className="flex-1 flex flex-col items-center justify-center gap-8">
+      <QuizHeader onSettings={onSettings} />
+      <div className="flex-1 flex flex-col items-center justify-center gap-8 pb-20">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-foreground mb-4">
-            Dein Score
+            {t.yourScore}
           </h2>
           <p className="text-5xl font-bold text-primary">
             {score} / {totalQuestions}
@@ -23,9 +27,9 @@ const ScoreScreen = ({ score, totalQuestions, onNext }: ScoreScreenProps) => {
         <Button
           onClick={onNext}
           size="lg"
-          className="bg-secondary text-secondary-foreground hover:bg-secondary/90 text-xl px-12 py-6 h-auto"
+          className="bg-secondary text-secondary-foreground w-full max-w-md h-14 text-xl"
         >
-          Next
+          {t.next}
         </Button>
       </div>
     </div>

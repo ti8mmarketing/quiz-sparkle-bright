@@ -1,21 +1,25 @@
 import { Button } from "@/components/ui/button";
 import QuizHeader from "./QuizHeader";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface StartScreenProps {
   onStart: () => void;
+  onSettings: () => void;
 }
 
-const StartScreen = ({ onStart }: StartScreenProps) => {
+const StartScreen = ({ onStart, onSettings }: StartScreenProps) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
-      <QuizHeader />
-      <div className="flex-1 flex items-center justify-center">
+      <QuizHeader onSettings={onSettings} />
+      <div className="flex-1 flex items-center justify-center pb-20">
         <Button
           onClick={onStart}
           size="lg"
-          className="bg-secondary text-secondary-foreground hover:bg-secondary/90 text-xl px-12 py-6 h-auto"
+          className="bg-secondary text-secondary-foreground w-full max-w-md h-14 text-xl"
         >
-          Start
+          {t.start}
         </Button>
       </div>
     </div>

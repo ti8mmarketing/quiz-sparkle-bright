@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Question } from "@/data/questions";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface QuestionCardProps {
   question: Question;
@@ -9,24 +10,32 @@ interface QuestionCardProps {
 }
 
 const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
+  const { t } = useLanguage();
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [wrongAnswers, setWrongAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [isSkipped, setIsSkipped] = useState(false);
 
   useEffect(() => {
     setSelectedAnswer(null);
+    setWrongAnswers([]);
     setShowResults(false);
     setIsSkipped(false);
   }, [question.id]);
 
   const handleAnswerClick = (index: number) => {
-    if (showResults && index !== question.correctAnswer) return;
+    if (showResults) return;
 
     setSelectedAnswer(index);
     const isCorrect = index === question.correctAnswer;
-    onAnswer(isCorrect);
 
-    if (isCorrect) {
+    if (!isCorrect) {
+      if (!wrongAnswers.includes(index)) {
+        setWrongAnswers([...wrongAnswers, index]);
+      }
+      onAnswer(false);
+    } else {
+      onAnswer(true);
       setShowResults(true);
       setTimeout(() => {
         onNext();
@@ -57,12 +66,12 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
       return "bg-destructive text-destructive-foreground";
     }
 
-    // Show clicked wrong answer in red
-    if (selectedAnswer === index && index !== question.correctAnswer) {
+    // Show wrong answers that were clicked in red
+    if (wrongAnswers.includes(index)) {
       return "bg-destructive text-destructive-foreground";
     }
 
-    // Default button color (no hover effect)
+    // Default button color
     return "bg-secondary text-secondary-foreground";
   };
 
@@ -89,9 +98,9 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
         <Button
           onClick={handleSkip}
           disabled={showResults}
-          className="bg-muted text-foreground hover:bg-muted/80"
+          className="bg-muted text-foreground"
         >
-          Skip
+          {t.skip}
         </Button>
       </div>
     </div>

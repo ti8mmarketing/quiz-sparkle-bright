@@ -3,10 +3,11 @@ import StartScreen from "@/components/StartScreen";
 import QuestionCard from "@/components/QuestionCard";
 import ScoreScreen from "@/components/ScoreScreen";
 import EndScreen from "@/components/EndScreen";
+import SettingsScreen from "@/components/SettingsScreen";
 import QuizHeader from "@/components/QuizHeader";
 import { questions } from "@/data/questions";
 
-type Screen = "start" | "quiz" | "score" | "end";
+type Screen = "start" | "quiz" | "score" | "end" | "settings";
 
 const Index = () => {
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
@@ -49,14 +50,26 @@ const Index = () => {
     setScore(0);
   };
 
+  const handleSettings = () => {
+    setCurrentScreen("settings");
+  };
+
+  const handleBackFromSettings = () => {
+    setCurrentScreen("start");
+  };
+
   if (currentScreen === "start") {
-    return <StartScreen onStart={handleStart} />;
+    return <StartScreen onStart={handleStart} onSettings={handleSettings} />;
+  }
+
+  if (currentScreen === "settings") {
+    return <SettingsScreen onBack={handleBackFromSettings} />;
   }
 
   if (currentScreen === "quiz") {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center">
-        <QuizHeader showHomeButton onHome={handleHome} />
+        <QuizHeader showHomeButton onHome={handleHome} onSettings={handleSettings} />
         <div className="flex-1 flex items-center justify-center w-full">
           <QuestionCard
             question={questions[currentQuestionIndex]}
@@ -74,11 +87,12 @@ const Index = () => {
         score={score}
         totalQuestions={questions.length}
         onNext={handleScoreNext}
+        onSettings={handleSettings}
       />
     );
   }
 
-  return <EndScreen onRestart={handleRestart} onHome={handleHome} />;
+  return <EndScreen onRestart={handleRestart} onHome={handleHome} onSettings={handleSettings} />;
 };
 
 export default Index;
