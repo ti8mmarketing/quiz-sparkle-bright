@@ -20,16 +20,18 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
   }, [question.id]);
 
   const handleAnswerClick = (index: number) => {
-    if (showResults) return;
+    if (showResults && index !== question.correctAnswer) return;
 
     setSelectedAnswer(index);
-    setShowResults(true);
     const isCorrect = index === question.correctAnswer;
     onAnswer(isCorrect);
 
-    setTimeout(() => {
-      onNext();
-    }, 2000);
+    if (isCorrect) {
+      setShowResults(true);
+      setTimeout(() => {
+        onNext();
+      }, 2000);
+    }
   };
 
   const handleSkip = () => {
@@ -45,19 +47,23 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
   };
 
   const getButtonClass = (index: number) => {
-    if (!showResults) {
-      return "bg-secondary text-secondary-foreground hover:bg-secondary/90";
-    }
-
-    if (index === question.correctAnswer) {
+    // Show correct answer in green when revealed
+    if (showResults && index === question.correctAnswer) {
       return "bg-success text-success-foreground";
     }
 
-    if (selectedAnswer === index || isSkipped) {
+    // Show wrong answers in red when skipped
+    if (isSkipped && index !== question.correctAnswer) {
       return "bg-destructive text-destructive-foreground";
     }
 
-    return "bg-secondary text-secondary-foreground";
+    // Show clicked wrong answer in red
+    if (selectedAnswer === index && index !== question.correctAnswer) {
+      return "bg-destructive text-destructive-foreground";
+    }
+
+    // Default button color
+    return "bg-secondary text-secondary-foreground hover:bg-secondary/90";
   };
 
   return (
@@ -71,7 +77,7 @@ const QuestionCard = ({ question, onAnswer, onNext }: QuestionCardProps) => {
           <Button
             key={index}
             onClick={() => handleAnswerClick(index)}
-            disabled={showResults}
+            disabled={showResults && index !== question.correctAnswer}
             className={`${getButtonClass(index)} h-16 text-lg transition-colors duration-300`}
           >
             {answer}
