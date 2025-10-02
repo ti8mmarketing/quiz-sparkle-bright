@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import StartScreen from "@/components/StartScreen";
 import QuestionCard from "@/components/QuestionCard";
@@ -27,6 +27,14 @@ const Index = () => {
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [filteredQuestions, setFilteredQuestions] = useState(getQuestionsByLanguage(language).filter(q => q.difficulty === "easy"));
+  const [coinPop, setCoinPop] = useState(false);
+
+  useEffect(() => {
+    if (coinPop) {
+      const timer = setTimeout(() => setCoinPop(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [coinPop]);
 
   const handleStart = (selectedDifficulty: Difficulty) => {
     setDifficulty(selectedDifficulty);
@@ -43,6 +51,7 @@ const Index = () => {
       setScore(score + 1);
       const coinMultiplier = difficulty === "easy" ? 1 : difficulty === "medium" ? 2 : 3;
       addCoins(coinMultiplier);
+      setCoinPop(true);
     }
   };
 
@@ -118,7 +127,15 @@ const Index = () => {
           <QuizHeader showHomeButton onHome={handleHome} onSettings={handleSettings} />
           {currentUser && (
             <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
-              <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+              <img 
+                src={coinIcon} 
+                alt="Coin" 
+                className={`h-8 w-8 object-contain transition-all ${coinPop ? 'animate-[scale-in_0.3s_ease-out]' : ''}`}
+                style={{ 
+                  filter: imageFilter,
+                  transform: coinPop ? 'scale(1.3)' : 'scale(1)'
+                }} 
+              />
               <span className="text-primary">{currentUser.coins}</span>
             </div>
           )}
