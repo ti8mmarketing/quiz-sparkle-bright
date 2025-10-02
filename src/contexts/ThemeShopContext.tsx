@@ -29,21 +29,35 @@ const themePrices: Record<ThemeStyle, number> = {
 export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
   const [purchasedThemes, setPurchasedThemes] = useState<ThemeStyle[]>(["default"]);
   const [activeTheme, setActiveThemeState] = useState<ThemeStyle>("default");
+  const [currentUsername, setCurrentUsername] = useState<string>("");
 
   useEffect(() => {
-    const storedPurchased = localStorage.getItem("quiz-purchased-themes");
-    const purchased = storedPurchased ? JSON.parse(storedPurchased) : ["default"];
-    setPurchasedThemes(purchased);
-    
-    const storedActive = localStorage.getItem("quiz-active-theme");
-    if (storedActive && purchased.includes(storedActive)) {
-      setActiveThemeState(storedActive as ThemeStyle);
-      applyTheme(storedActive as ThemeStyle);
+    // Check if there's a logged in user
+    const user = localStorage.getItem("quiz-current-user");
+    const username = user ? JSON.parse(user).username : "";
+    setCurrentUsername(username);
+
+    if (username) {
+      // Load user-specific purchased themes
+      const userThemesKey = `quiz-purchased-themes-${username}`;
+      const storedPurchased = localStorage.getItem(userThemesKey);
+      const purchased = storedPurchased ? JSON.parse(storedPurchased) : ["default"];
+      setPurchasedThemes(purchased);
+      
+      const userActiveThemeKey = `quiz-active-theme-${username}`;
+      const storedActive = localStorage.getItem(userActiveThemeKey);
+      if (storedActive && purchased.includes(storedActive)) {
+        setActiveThemeState(storedActive as ThemeStyle);
+        applyTheme(storedActive as ThemeStyle);
+      } else {
+        setActiveThemeState("default");
+        applyTheme("default");
+      }
     } else {
-      // Reset to default if stored theme is not purchased
+      // No user logged in, reset to default
+      setPurchasedThemes(["default"]);
       setActiveThemeState("default");
       applyTheme("default");
-      localStorage.setItem("quiz-active-theme", "default");
     }
   }, []);
 
@@ -57,7 +71,10 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
     if (purchasedThemes.includes(theme)) {
       setActiveThemeState(theme);
       applyTheme(theme);
-      localStorage.setItem("quiz-active-theme", theme);
+      if (currentUsername) {
+        const userActiveThemeKey = `quiz-active-theme-${currentUsername}`;
+        localStorage.setItem(userActiveThemeKey, theme);
+      }
     }
   };
 
@@ -67,7 +84,10 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
     }
     const updatedThemes = [...purchasedThemes, theme];
     setPurchasedThemes(updatedThemes);
-    localStorage.setItem("quiz-purchased-themes", JSON.stringify(updatedThemes));
+    if (currentUsername) {
+      const userThemesKey = `quiz-purchased-themes-${currentUsername}`;
+      localStorage.setItem(userThemesKey, JSON.stringify(updatedThemes));
+    }
     return true;
   };
 
@@ -78,7 +98,10 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
   const resetTheme = () => {
     setActiveThemeState("default");
     applyTheme("default");
-    localStorage.setItem("quiz-active-theme", "default");
+    if (currentUsername) {
+      const userActiveThemeKey = `quiz-active-theme-${currentUsername}`;
+      localStorage.setItem(userActiveThemeKey, "default");
+    }
   };
 
   return (
