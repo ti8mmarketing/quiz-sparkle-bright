@@ -27,7 +27,7 @@ interface StartScreenProps {
 const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
   const { t } = useLanguage();
   const { currentUser, logout, deleteAccount } = useAuth();
-  const { resetTheme } = useThemeShop();
+  const { resetTheme, saveUserProgress } = useThemeShop();
   const { theme } = useTheme();
   const imageFilter = useThemeImageFilter();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
@@ -39,6 +39,11 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   const [passwordError, setPasswordError] = useState("");
 
   const handleLogout = () => {
+    // Save all progress before logout
+    saveUserProgress();
+    console.log("✅ Progress saved before logout");
+    
+    // Then logout
     logout();
     resetTheme();
     setMenuOpen(false);

@@ -79,7 +79,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    const username = currentUser?.username;
+    if (currentUser) {
+      const username = currentUser.username;
+      
+      // Save current user data before logout
+      const updatedUsers = users.map(u => 
+        u.username === currentUser.username ? currentUser : u
+      );
+      setUsers(updatedUsers);
+      localStorage.setItem("quiz-users", JSON.stringify(updatedUsers));
+      
+      console.log(`✅ User data saved for ${username} before logout`);
+    }
+    
     setCurrentUser(null);
     
     // Keep theme data in localStorage for the user
