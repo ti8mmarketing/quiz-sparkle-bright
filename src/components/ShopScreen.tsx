@@ -72,6 +72,12 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
+      {currentUser && (
+        <div className="absolute right-4 top-[4.5rem] md:top-20 flex items-center gap-2 text-foreground font-bold text-xl">
+          <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+          <span className="text-primary">{currentUser.coins}</span>
+        </div>
+      )}
       <Button
         onClick={onBack}
         variant="ghost"
@@ -83,8 +89,8 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 max-w-6xl py-8">
         <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-6 md:mb-8">🛒 Design Shop</h1>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-          <div className="md:col-span-1 lg:col-span-2 grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full">
+          <div className="sm:col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {themes.map((theme) => {
             const isPurchased = purchasedThemes.includes(theme.id);
             const isActive = activeTheme === theme.id;
@@ -93,13 +99,13 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             return (
               <Card 
                 key={theme.id} 
-                className="p-4 md:p-6 bg-card border-border cursor-pointer transition-all hover:border-primary"
+                className="p-3 md:p-6 bg-card border-border cursor-pointer transition-all hover:border-primary"
                 onMouseEnter={() => setPreviewTheme(theme.id)}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
-                <div className="flex flex-col gap-3 md:gap-4">
+                <div className="flex flex-col gap-2 md:gap-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg md:text-xl font-bold text-card-foreground">{theme.name}</h3>
+                    <h3 className="text-base md:text-xl font-bold text-card-foreground">{theme.name}</h3>
                     {isActive && (
                       <div className="flex items-center gap-1 text-success">
                         <Check className="w-5 h-5" />
@@ -108,7 +114,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                     )}
                   </div>
                   
-                  <div className={`h-16 md:h-24 rounded-lg ${theme.colorClass}`}></div>
+                  <div className={`h-12 md:h-24 rounded-lg ${theme.colorClass}`}></div>
                   
                   <div className="flex items-center gap-2">
                     <img src={coinIcon} alt="Coin" className="h-5 w-5 object-contain transition-all" style={{ filter: imageFilter }} />
@@ -144,8 +150,8 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
           })}
           </div>
           
-          <div className="md:col-span-1 lg:col-span-1">
-            <Card className="p-6 bg-card border-border sticky top-4">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Card className="p-4 md:p-6 bg-card border-border sticky top-4">
               <h3 className="text-xl font-bold text-card-foreground mb-4">Vorschau</h3>
               <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
                 <div className="p-4 rounded-lg bg-background border-2 border-border">

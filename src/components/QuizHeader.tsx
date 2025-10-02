@@ -34,12 +34,6 @@ const QuizHeader = ({
           <Home className="h-8 w-8" />
         </Button>
       )}
-      {currentUser && (
-        <div className="absolute right-4 top-20 md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
-          <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
-          <span className="text-primary">{currentUser.coins}</span>
-        </div>
-      )}
       {showSettingsButton && (
       <Button
         onClick={onSettings}

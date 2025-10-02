@@ -47,13 +47,13 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
     <div className="min-h-screen bg-background flex flex-col">
       <div className="border-b-4 bg-muted backdrop-blur">
         <QuizHeader onSettings={onSettings} />
+        {currentUser && (
+          <div className="absolute right-4 top-[4.5rem] md:top-20 flex items-center gap-2 text-foreground font-bold text-xl">
+            <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+            <span className="text-primary">{currentUser.coins}</span>
+          </div>
+        )}
       </div>
-      {currentUser && (
-        <div className="absolute right-4 top-32 md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
-          <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
-          <span className="text-primary">{currentUser.coins}</span>
-        </div>
-      )}
       <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
         <SheetTrigger asChild>
           <Button
