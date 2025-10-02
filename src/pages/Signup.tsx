@@ -49,7 +49,7 @@ const Signup = () => {
       </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4">
         <div className="w-full max-w-md space-y-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-foreground">Registrieren</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground">Registrieren</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="username">{t.username}</Label>
