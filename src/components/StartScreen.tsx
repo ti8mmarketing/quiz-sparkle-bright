@@ -49,7 +49,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
         <QuizHeader onSettings={onSettings} />
       </div>
       {currentUser && (
-        <div className="absolute right-28 top-4 flex items-center gap-2 text-foreground font-bold text-xl">
+        <div className="absolute right-4 top-20 md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
           <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
@@ -106,7 +106,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           onClick={onShop}
           variant="ghost"
           size="icon"
-          className="absolute left-4 bottom-4 text-foreground transition-all hover:scale-110 h-12 w-12"
+          className="absolute left-4 top-20 md:left-4 md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
         >
           <ShoppingCart className="h-10 w-10" />
         </Button>
