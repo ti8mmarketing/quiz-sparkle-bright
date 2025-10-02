@@ -66,12 +66,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // Update users state with fresh data
       setUsers(allUsers);
       
-      // Load user's theme preferences
+      // Load user's saved theme and apply it immediately
       const userActiveTheme = localStorage.getItem(`quiz-active-theme-${username}`);
       if (userActiveTheme) {
         const root = document.documentElement;
         root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
         root.classList.add(`theme-${userActiveTheme}`);
+        console.log(`🎨 Restored theme: ${userActiveTheme} for user ${username}`);
+      } else {
+        // No saved theme, apply default
+        const root = document.documentElement;
+        root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
+        root.classList.add("theme-default");
       }
       
       // Dispatch custom event to notify other components
