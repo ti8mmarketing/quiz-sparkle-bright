@@ -106,7 +106,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           onClick={onShop}
           variant="ghost"
           size="icon"
-          className="absolute left-4 bottom-4 text-foreground transition-all hover:scale-125 h-12 w-12"
+          className="absolute left-4 bottom-4 text-foreground transition-all hover:scale-115 h-12 w-12"
         >
           <ShoppingCart className="h-10 w-10" />
         </Button>

@@ -175,7 +175,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mt-4 text-center">
-                {previewTheme ? "Bewege die Maus über ein Theme für eine Vorschau" : "Bewege die Maus über ein Theme"}
+                Bewege die Maus über ein Design für eine Vorschau
               </p>
             </Card>
           </div>
