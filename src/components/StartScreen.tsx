@@ -89,128 +89,130 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   };
   
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <div className="border-b-4 bg-muted backdrop-blur">
-        <QuizHeader onSettings={onSettings} />
+    <>
+      <div className="min-h-screen bg-background flex flex-col">
+        <div className="border-b-4 bg-muted backdrop-blur">
+          <QuizHeader onSettings={onSettings} />
+          {currentUser && (
+            <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
+              <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+              <span className="text-primary">{currentUser.coins}</span>
+            </div>
+          )}
+        </div>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1"
+            >
+              <img 
+                src={theme === "light" ? qLogoLight : qLogo} 
+                alt="Q Logo" 
+                className="h-10 w-10 object-contain transition-all"
+                style={{ filter: theme === "light" ? `${imageFilter} contrast(1.15) brightness(0.95) drop-shadow(0 0 1.5px hsl(var(--primary)))` : imageFilter }}
+              />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-64">
+            <SheetHeader>
+              <SheetTitle>{t.menu}</SheetTitle>
+            </SheetHeader>
+            <div className="mt-8 flex flex-col gap-4">
+              {!currentUser ? (
+                <>
+                  <Button 
+                    onClick={handleLoginClick}
+                    className="w-full bg-secondary text-secondary-foreground"
+                  >
+                    {t.login}
+                  </Button>
+                  <Button 
+                    onClick={handleSignupClick}
+                    className="w-full bg-secondary text-secondary-foreground"
+                  >
+                    {t.signup}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button 
+                    onClick={handleLogout}
+                    variant="destructive"
+                    className="w-full"
+                  >
+                    {t.logout}
+                  </Button>
+                  <Button 
+                    onClick={handleDeleteClick}
+                    variant="destructive"
+                    className="w-full bg-red-600 hover:bg-red-700"
+                  >
+                    Account löschen
+                  </Button>
+                </>
+              )}
+            </div>
+          </SheetContent>
+        </Sheet>
         {currentUser && (
-          <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
-            <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
-            <span className="text-primary">{currentUser.coins}</span>
-          </div>
-        )}
-      </div>
-      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-        <SheetTrigger asChild>
           <Button
+            onClick={onShop}
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1"
+            className="absolute left-4 top-[5.5rem] md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
           >
-            <img 
-              src={theme === "light" ? qLogoLight : qLogo} 
-              alt="Q Logo" 
-              className="h-10 w-10 object-contain transition-all"
-              style={{ filter: theme === "light" ? `${imageFilter} contrast(1.15) brightness(0.95) drop-shadow(0 0 1.5px hsl(var(--primary)))` : imageFilter }}
-            />
+            <ShoppingCart className="h-10 w-10" />
           </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="w-64">
-          <SheetHeader>
-            <SheetTitle>{t.menu}</SheetTitle>
-          </SheetHeader>
-          <div className="mt-8 flex flex-col gap-4">
-            {!currentUser ? (
-              <>
-                <Button 
-                  onClick={handleLoginClick}
-                  className="w-full bg-secondary text-secondary-foreground"
-                >
-                  {t.login}
-                </Button>
-                <Button 
-                  onClick={handleSignupClick}
-                  className="w-full bg-secondary text-secondary-foreground"
-                >
-                  {t.signup}
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button 
-                  onClick={handleLogout}
-                  variant="destructive"
-                  className="w-full"
-                >
-                  {t.logout}
-                </Button>
-                <Button 
-                  onClick={handleDeleteClick}
-                  variant="destructive"
-                  className="w-full bg-red-600 hover:bg-red-700"
-                >
-                  Account löschen
-                </Button>
-              </>
-            )}
+        )}
+        <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8 bg-background">
+          <img 
+            src={quizLogo} 
+            alt="Quiz App Logo" 
+            className="w-80 h-80 mb-4 transition-all"
+            style={{ filter: imageFilter }}
+          />
+          <div className="flex gap-4 mb-4">
+            <Button
+              onClick={() => setSelectedDifficulty("easy")}
+              className={`h-12 px-6 text-lg ${
+                selectedDifficulty === "easy"
+                  ? "bg-success text-success-foreground border-2 border-success"
+                  : "bg-success/50 text-success-foreground"
+              }`}
+            >
+              {t.easy}
+            </Button>
+            <Button
+              onClick={() => setSelectedDifficulty("medium")}
+              className={`h-12 px-6 text-lg ${
+                selectedDifficulty === "medium"
+                  ? "bg-[hsl(38,91%,65%)] text-white border-2 border-[hsl(38,91%,65%)]"
+                  : "bg-[hsl(38,91%,65%)]/50 text-white"
+              }`}
+            >
+              {t.medium}
+            </Button>
+            <Button
+              onClick={() => setSelectedDifficulty("hard")}
+              className={`h-12 px-6 text-lg ${
+                selectedDifficulty === "hard"
+                  ? "bg-[hsl(356,98%,55%)] text-white border-2 border-[hsl(356,98%,55%)]"
+                  : "bg-[hsl(356,98%,55%)]/50 text-white"
+              }`}
+            >
+              {t.hard}
+            </Button>
           </div>
-        </SheetContent>
-      </Sheet>
-      {currentUser && (
-        <Button
-          onClick={onShop}
-          variant="ghost"
-          size="icon"
-          className="absolute left-4 top-[5.5rem] md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
-        >
-          <ShoppingCart className="h-10 w-10" />
-        </Button>
-      )}
-      <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8 bg-background">
-        <img 
-          src={quizLogo} 
-          alt="Quiz App Logo" 
-          className="w-80 h-80 mb-4 transition-all"
-          style={{ filter: imageFilter }}
-        />
-        <div className="flex gap-4 mb-4">
           <Button
-            onClick={() => setSelectedDifficulty("easy")}
-            className={`h-12 px-6 text-lg ${
-              selectedDifficulty === "easy"
-                ? "bg-success text-success-foreground border-2 border-success"
-                : "bg-success/50 text-success-foreground"
-            }`}
+            onClick={() => onStart(selectedDifficulty)}
+            size="lg"
+            className="bg-secondary text-secondary-foreground w-full max-w-md h-14 text-xl"
           >
-            {t.easy}
-          </Button>
-          <Button
-            onClick={() => setSelectedDifficulty("medium")}
-            className={`h-12 px-6 text-lg ${
-              selectedDifficulty === "medium"
-                ? "bg-[hsl(38,91%,65%)] text-white border-2 border-[hsl(38,91%,65%)]"
-                : "bg-[hsl(38,91%,65%)]/50 text-white"
-            }`}
-          >
-            {t.medium}
-          </Button>
-          <Button
-            onClick={() => setSelectedDifficulty("hard")}
-            className={`h-12 px-6 text-lg ${
-              selectedDifficulty === "hard"
-                ? "bg-[hsl(356,98%,55%)] text-white border-2 border-[hsl(356,98%,55%)]"
-                : "bg-[hsl(356,98%,55%)]/50 text-white"
-            }`}
-          >
-            {t.hard}
+            {t.start}
           </Button>
         </div>
-        <Button
-          onClick={() => onStart(selectedDifficulty)}
-          size="lg"
-          className="bg-secondary text-secondary-foreground w-full max-w-md h-14 text-xl"
-        >
-          {t.start}
-        </Button>
       </div>
 
       {/* Delete Account Password Dialog */}
@@ -284,7 +286,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+    </>
   );
 };
 
