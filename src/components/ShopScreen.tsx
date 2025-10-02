@@ -133,7 +133,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                       )}
                     </div>
                     
-                    <div className={`h-24 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
+                    <div className={`h-32 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
                     
                     <div className="flex items-center gap-2 md:gap-1.5 lg:gap-2">
                       <img src={coinIcon} alt="Coin" className="h-5 w-5 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
