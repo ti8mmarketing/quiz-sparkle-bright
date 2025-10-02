@@ -10,6 +10,7 @@ import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import { useTheme } from "@/contexts/ThemeContext";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
+import qLogoLight from "@/assets/q-logo-light.png";
 import coinIcon from "@/assets/coin-icon.png";
 
 interface StartScreenProps {
@@ -66,7 +67,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
             }`}
           >
             <img 
-              src={qLogo} 
+              src={theme === "light" ? qLogoLight : qLogo} 
               alt="Q Logo" 
               className="h-10 w-10 object-contain transition-all"
               style={{ filter: imageFilter }}
