@@ -14,6 +14,7 @@ interface AuthContextType {
   signup: (username: string, password: string) => boolean;
   logout: () => void;
   addCoins: (amount: number) => void;
+  deleteAccount: (password: string) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -92,8 +93,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const deleteAccount = (password: string): boolean => {
+    if (!currentUser) return false;
+    
+    // Verify password
+    if (currentUser.password !== password) {
+      return false;
+    }
+    
+    const username = currentUser.username;
+    
+    // Remove user from users array
+    const updatedUsers = users.filter(u => u.username !== username);
+    setUsers(updatedUsers);
+    localStorage.setItem("quiz-users", JSON.stringify(updatedUsers));
+    
+    // Remove user-specific data
+    localStorage.removeItem(`quiz-purchased-themes-${username}`);
+    localStorage.removeItem(`quiz-active-theme-${username}`);
+    
+    // Logout
+    setCurrentUser(null);
+    
+    // Reset theme to default
+    const root = document.documentElement;
+    root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
+    root.classList.add("theme-default");
+    
+    return true;
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser, users, login, signup, logout, addCoins }}>
+    <AuthContext.Provider value={{ currentUser, users, login, signup, logout, addCoins, deleteAccount }}>
       {children}
     </AuthContext.Provider>
   );

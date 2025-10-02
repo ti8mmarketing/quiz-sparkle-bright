@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { ShoppingCart } from "lucide-react";
 import QuizHeader from "./QuizHeader";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -23,12 +26,17 @@ interface StartScreenProps {
 
 const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigateToSignup }: StartScreenProps) => {
   const { t } = useLanguage();
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, deleteAccount } = useAuth();
   const { resetTheme } = useThemeShop();
   const { theme } = useTheme();
   const imageFilter = useThemeImageFilter();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleLogout = () => {
     logout();
@@ -44,6 +52,40 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   const handleSignupClick = () => {
     setMenuOpen(false);
     onNavigateToSignup();
+  };
+
+  const handleDeleteClick = () => {
+    setMenuOpen(false);
+    setDeleteDialogOpen(true);
+    setPassword1("");
+    setPassword2("");
+    setPasswordError("");
+  };
+
+  const handleDeletePasswordSubmit = () => {
+    if (password1 !== password2) {
+      setPasswordError("Passwörter stimmen nicht überein");
+      return;
+    }
+    if (!password1 || !password2) {
+      setPasswordError("Bitte Passwort eingeben");
+      return;
+    }
+    setDeleteDialogOpen(false);
+    setConfirmDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    const success = deleteAccount(password1);
+    if (success) {
+      setConfirmDialogOpen(false);
+      setPassword1("");
+      setPassword2("");
+    } else {
+      setConfirmDialogOpen(false);
+      setDeleteDialogOpen(true);
+      setPasswordError("Falsches Passwort");
+    }
   };
   
   return (
@@ -93,13 +135,22 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
                 </Button>
               </>
             ) : (
-              <Button 
-                onClick={handleLogout}
-                variant="destructive"
-                className="w-full"
-              >
-                {t.logout}
-              </Button>
+              <>
+                <Button 
+                  onClick={handleLogout}
+                  variant="destructive"
+                  className="w-full"
+                >
+                  {t.logout}
+                </Button>
+                <Button 
+                  onClick={handleDeleteClick}
+                  variant="destructive"
+                  className="w-full bg-red-600 hover:bg-red-700"
+                >
+                  Account löschen
+                </Button>
+              </>
             )}
           </div>
         </SheetContent>
@@ -161,6 +212,78 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           {t.start}
         </Button>
       </div>
+
+      {/* Delete Account Password Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Account löschen</AlertDialogTitle>
+            <AlertDialogDescription>
+              Bitte gib dein Passwort zweimal ein, um deinen Account zu löschen.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="password1">Passwort</Label>
+              <Input
+                id="password1"
+                type="password"
+                value={password1}
+                onChange={(e) => {
+                  setPassword1(e.target.value);
+                  setPasswordError("");
+                }}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password2">Passwort wiederholen</Label>
+              <Input
+                id="password2"
+                type="password"
+                value={password2}
+                onChange={(e) => {
+                  setPassword2(e.target.value);
+                  setPasswordError("");
+                }}
+              />
+            </div>
+            {passwordError && (
+              <p className="text-sm text-destructive">{passwordError}</p>
+            )}
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => {
+              setPassword1("");
+              setPassword2("");
+              setPasswordError("");
+            }}>Abbrechen</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeletePasswordSubmit}>
+              Weiter
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Confirm Delete Dialog */}
+      <AlertDialog open={confirmDialogOpen} onOpenChange={setConfirmDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Bist du sicher?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Möchtest du deinen Account wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => {
+              setPassword1("");
+              setPassword2("");
+            }}>Nein</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+              Ja, Account löschen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
