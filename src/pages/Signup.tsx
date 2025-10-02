@@ -41,7 +41,7 @@ const Signup = () => {
         onClick={() => navigate("/")}
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-4 text-foreground h-12 w-12 z-10"
+        className="absolute left-4 top-20 text-primary hover:text-primary/80 h-12 w-12 z-50"
       >
         <Home className="h-8 w-8" />
       </Button>
