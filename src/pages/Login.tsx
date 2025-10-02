@@ -43,7 +43,7 @@ const Login = () => {
         onClick={() => navigate("/")}
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-4 text-foreground transition-all hover:scale-105 h-12 w-12 z-50"
+        className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 z-50"
       >
         <Home className="h-8 w-8" />
       </Button>
