@@ -17,19 +17,26 @@ const QuestionCard = ({ question, onAnswer, onNext, currentQuestion, totalQuesti
   const [wrongAnswers, setWrongAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [isSkipped, setIsSkipped] = useState(false);
+  const [shuffledAnswers, setShuffledAnswers] = useState<string[]>([]);
+  const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number>(0);
 
   useEffect(() => {
+    // Shuffle answers when question changes
+    const answersWithIndex = question.answers.map((answer, index) => ({ answer, originalIndex: index }));
+    const shuffled = [...answersWithIndex].sort(() => Math.random() - 0.5);
+    setShuffledAnswers(shuffled.map(item => item.answer));
+    setCorrectAnswerIndex(shuffled.findIndex(item => item.originalIndex === question.correctAnswer));
     setSelectedAnswer(null);
     setWrongAnswers([]);
     setShowResults(false);
     setIsSkipped(false);
-  }, [question.id]);
+  }, [question.id, question.answers, question.correctAnswer]);
 
   const handleAnswerClick = (index: number) => {
     if (showResults) return;
 
     setSelectedAnswer(index);
-    const isCorrect = index === question.correctAnswer;
+    const isCorrect = index === correctAnswerIndex;
 
     if (!isCorrect) {
       if (!wrongAnswers.includes(index)) {
@@ -61,12 +68,12 @@ const QuestionCard = ({ question, onAnswer, onNext, currentQuestion, totalQuesti
 
   const getButtonClass = (index: number) => {
     // Show correct answer in green when revealed
-    if (showResults && index === question.correctAnswer) {
+    if (showResults && index === correctAnswerIndex) {
       return "bg-success text-success-foreground";
     }
 
     // Show all wrong answers in red when results are shown
-    if (showResults && index !== question.correctAnswer) {
+    if (showResults && index !== correctAnswerIndex) {
       return "bg-destructive text-destructive-foreground";
     }
 
@@ -90,11 +97,11 @@ const QuestionCard = ({ question, onAnswer, onNext, currentQuestion, totalQuesti
       </h2>
 
       <div className="grid grid-cols-1 gap-4 mb-8">
-        {question.answers.map((answer, index) => (
+        {shuffledAnswers.map((answer, index) => (
           <Button
             key={index}
             onClick={() => handleAnswerClick(index)}
-            disabled={showResults && index !== question.correctAnswer}
+            disabled={showResults && index !== correctAnswerIndex}
             className={`${getButtonClass(index)} h-16 text-lg transition-colors duration-300`}
           >
             {answer}
