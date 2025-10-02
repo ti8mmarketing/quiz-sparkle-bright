@@ -8,7 +8,7 @@ import { useThemeShop, ThemeStyle } from "@/contexts/ThemeShopContext";
 import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import { toast } from "@/hooks/use-toast";
 import coinIcon from "@/assets/coin-icon.png";
-import { Check } from "lucide-react";
+import { Check, Home } from "lucide-react";
 
 interface ShopScreenProps {
   onBack: () => void;
@@ -83,9 +83,10 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       <Button
         onClick={onBack}
         variant="ghost"
-        className="absolute left-4 top-4 text-foreground hover:bg-muted"
+        size="icon"
+        className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12"
       >
-        ← Zurück
+        <Home className="h-8 w-8" />
       </Button>
       
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 max-w-6xl py-8">
