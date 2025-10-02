@@ -3,11 +3,11 @@ import { useThemeShop } from "@/contexts/ThemeShopContext";
 
 export const useThemeImageFilter = () => {
   const { activeTheme } = useThemeShop();
-  const [filterStyle, setFilterStyle] = useState<string>("");
+  const [filterStyle, setFilterStyle] = useState<string>("none");
 
   useEffect(() => {
     const filters: Record<string, string> = {
-      default: "hue-rotate(0deg)",
+      default: "none",
       pink: "hue-rotate(108deg) saturate(1.2)",
       green: "hue-rotate(-105deg) saturate(1.2)",
       orange: "hue-rotate(-190deg) saturate(1.2)",
@@ -19,7 +19,7 @@ export const useThemeImageFilter = () => {
       indigo: "hue-rotate(40deg) saturate(1.2)",
     };
 
-    setFilterStyle(filters[activeTheme] || filters.default);
+    setFilterStyle(filters[activeTheme] || "none");
   }, [activeTheme]);
 
   return filterStyle;
