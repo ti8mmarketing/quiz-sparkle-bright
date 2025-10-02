@@ -102,7 +102,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             return (
               <Card 
                 key={theme.id} 
-                className="p-3 md:p-3 lg:p-4 bg-card border-border cursor-pointer transition-all hover:border-primary"
+                className="p-3 md:p-3 lg:p-4 bg-muted/50 border-border cursor-pointer transition-all hover:border-primary"
                 onMouseEnter={() => setPreviewTheme(theme.id)}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
@@ -154,7 +154,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
           </div>
           
           <div className="hidden md:block lg:col-span-1">
-            <Card className="p-3 md:p-4 lg:p-6 bg-card border-border sticky top-4">
+            <Card className="p-3 md:p-4 lg:p-6 bg-muted/50 border-border sticky top-4">
               <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-3 md:mb-4">Vorschau</h3>
               <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
                 <div className="p-3 md:p-4 rounded-lg bg-background">
