@@ -101,7 +101,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <QuizHeader onSettings={onSettings} />
           {currentUser && (
             <>
-              <ProfileAvatar className="absolute left-1/2 -translate-x-1/2 top-[5.5rem] md:left-4 md:translate-x-0 md:top-28" size="md" />
+              <ProfileAvatar className="absolute left-1/2 -translate-x-1/2 top-[5.5rem] md:left-4 md:translate-x-0 md:top-32" size="md" />
               <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
                 <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
                 <span className="text-primary">{currentUser.coins}</span>
@@ -170,7 +170,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
             onClick={onShop}
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-[9.5rem] md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
+            className="absolute left-4 top-[5.5rem] md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
           >
             <ShoppingCart className="h-10 w-10" />
           </Button>
