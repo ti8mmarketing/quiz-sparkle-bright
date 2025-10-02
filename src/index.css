@@ -335,6 +335,55 @@ All colors MUST be HSL.
     --input: 243 20% 91%;
     --ring: 243 75% 59%;
   }
+
+  /* Ensure preview of Standard style (blue) is always consistent */
+  .theme-default {
+    --background: 206 89% 13%;
+    --foreground: 0 0% 100%;
+    --card: 206 89% 13%;
+    --card-foreground: 0 0% 100%;
+    --popover: 206 89% 13%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 212 87% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 204 64% 44%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 206 84% 24%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 204 64% 74%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --border: 206 84% 24%;
+    --input: 206 84% 24%;
+    --ring: 212 87% 55%;
+  }
+
+  .light.theme-default {
+    --background: 0 0% 100%;
+    --foreground: 206 89% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 206 89% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 206 89% 13%;
+    --primary: 212 87% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 204 64% 44%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 206 89% 13%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 212 87% 55%;
+  }
 }
 
 @layer base {
