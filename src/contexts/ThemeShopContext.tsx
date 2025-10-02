@@ -55,6 +55,16 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const checkCurrentUser = () => {
+      // Check if there's a username we should load themes for
+      const loginUsername = (window as any).__lastLoginUsername;
+      if (loginUsername) {
+        console.log(`📥 Login detected for user: ${loginUsername}`);
+        loadUserThemes(loginUsername);
+        delete (window as any).__lastLoginUsername;
+        return;
+      }
+      
+      // On logout or refresh without login
       const usersData = localStorage.getItem("quiz-users");
       if (!usersData) {
         setPurchasedThemes(["default"]);
@@ -65,16 +75,7 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
         return;
       }
       
-      // Check if there's a username we should load themes for
-      // This will be set by the user-login event
-      const storageEvent = (window as any).__lastLoginUsername;
-      if (storageEvent) {
-        loadUserThemes(storageEvent);
-        delete (window as any).__lastLoginUsername;
-        return;
-      }
-      
-      // Fallback: no active user
+      // Fallback: no active user (after logout or on fresh load)
       setPurchasedThemes(["default"]);
       setActiveThemeState("default");
       applyTheme("default");
@@ -82,19 +83,29 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
       console.log("🔄 No active user - reset to default theme");
     };
 
+    // Initial check
     checkCurrentUser();
     
     // Listen for custom events when user logs in/out
-    const handleUserChange = () => {
-      checkCurrentUser();
+    const handleUserLogin = () => {
+      console.log("🔔 User login event received");
+      setTimeout(() => checkCurrentUser(), 100);
     };
     
-    window.addEventListener('user-login', handleUserChange);
-    window.addEventListener('user-logout', handleUserChange);
+    const handleUserLogout = () => {
+      console.log("🔔 User logout event received");
+      setPurchasedThemes(["default"]);
+      setActiveThemeState("default");
+      applyTheme("default");
+      setCurrentUsername("");
+    };
+    
+    window.addEventListener('user-login', handleUserLogin);
+    window.addEventListener('user-logout', handleUserLogout);
     
     return () => {
-      window.removeEventListener('user-login', handleUserChange);
-      window.removeEventListener('user-logout', handleUserChange);
+      window.removeEventListener('user-login', handleUserLogin);
+      window.removeEventListener('user-logout', handleUserLogout);
     };
   }, []);
 
