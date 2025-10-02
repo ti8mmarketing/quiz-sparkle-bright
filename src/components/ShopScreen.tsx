@@ -89,8 +89,8 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 max-w-6xl py-8">
         <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-6 md:mb-8">🛒 Design Shop</h1>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full">
-          <div className="sm:col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+          <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {themes.map((theme) => {
             const isPurchased = purchasedThemes.includes(theme.id);
             const isActive = activeTheme === theme.id;
@@ -150,7 +150,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
           })}
           </div>
           
-          <div className="hidden sm:block sm:col-span-2 lg:col-span-1">
+          <div className="hidden md:block md:col-span-1">
             <Card className="p-4 md:p-6 bg-card border-border sticky top-4">
               <h3 className="text-xl font-bold text-card-foreground mb-4">Vorschau</h3>
               <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
