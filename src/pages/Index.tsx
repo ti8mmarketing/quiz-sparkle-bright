@@ -9,12 +9,15 @@ import ShopScreen from "@/components/ShopScreen";
 import QuizHeader from "@/components/QuizHeader";
 import { questions } from "@/data/questions";
 import { useAuth } from "@/contexts/AuthContext";
+import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
+import coinIcon from "@/assets/coin-icon.png";
 
 type Screen = "start" | "quiz" | "score" | "end" | "settings" | "shop";
 type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
-  const { addCoins } = useAuth();
+  const { addCoins, currentUser } = useAuth();
+  const imageFilter = useThemeImageFilter();
   const navigate = useNavigate();
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
   const [previousScreen, setPreviousScreen] = useState<Screen>("start");
@@ -107,7 +110,15 @@ const Index = () => {
   if (currentScreen === "quiz") {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center">
-        <QuizHeader showHomeButton onHome={handleHome} onSettings={handleSettings} />
+        <div className="border-b-4 bg-muted backdrop-blur w-full">
+          <QuizHeader showHomeButton onHome={handleHome} onSettings={handleSettings} />
+          {currentUser && (
+            <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
+              <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+              <span className="text-primary">{currentUser.coins}</span>
+            </div>
+          )}
+        </div>
         <div className="flex-1 flex items-center justify-center w-full">
           <QuestionCard
             question={filteredQuestions[currentQuestionIndex]}
