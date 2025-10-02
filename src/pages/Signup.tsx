@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import QuizHeader from "@/components/QuizHeader";
 import { useToast } from "@/hooks/use-toast";
+import { Home } from "lucide-react";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -34,8 +35,16 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center">
+    <div className="min-h-screen bg-background flex flex-col items-center relative">
       <QuizHeader />
+      <Button
+        onClick={() => navigate("/")}
+        variant="ghost"
+        size="icon"
+        className="absolute left-4 top-4 text-foreground hover:bg-muted h-12 w-12 z-10"
+      >
+        <Home className="h-8 w-8" />
+      </Button>
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4">
         <div className="w-full max-w-md space-y-8">
           <h2 className="text-3xl font-bold text-center text-primary">{t.signup}</h2>
