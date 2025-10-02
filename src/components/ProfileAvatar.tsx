@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { Camera, Image as ImageIcon, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import defaultAvatar from "@/assets/default-avatar.png";
 
 interface ProfileAvatarProps {
   className?: string;
@@ -45,14 +46,12 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
       <PopoverTrigger asChild>
         <button className={`${sizeClasses[size]} ${className}`}>
           <Avatar className="h-full w-full cursor-pointer border-2 border-primary transition-all hover:border-primary/70">
-            {currentUser.profilePicture ? (
-              <AvatarImage 
-                src={currentUser.profilePicture} 
-                alt="Profilbild"
-                className="object-cover"
-              />
-            ) : null}
-            <AvatarFallback className="bg-primary text-primary-foreground text-2xl font-bold">
+            <AvatarImage 
+              src={currentUser.profilePicture || defaultAvatar} 
+              alt="Profilbild"
+              className="object-cover"
+            />
+            <AvatarFallback className="bg-muted text-foreground">
               {currentUser.username[0].toUpperCase()}
             </AvatarFallback>
           </Avatar>
