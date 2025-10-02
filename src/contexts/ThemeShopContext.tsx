@@ -116,10 +116,8 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
     if (purchasedThemes.includes(theme)) {
       setActiveThemeState(theme);
       applyTheme(theme);
-      if (currentUsername) {
-        const userActiveThemeKey = `quiz-active-theme-${currentUsername}`;
-        localStorage.setItem(userActiveThemeKey, theme);
-      }
+      // Don't save immediately - only save on logout
+      console.log(`🎨 Theme ${theme} equipped (will be saved on logout)`);
     }
   };
 
