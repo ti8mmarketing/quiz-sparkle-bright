@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { Camera, Image as ImageIcon, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { Camera as CapacitorCamera, CameraResultType, CameraSource } from '@capacitor/camera';
 import defaultAvatar from "@/assets/default-avatar.png";
 
 interface ProfileAvatarProps {
@@ -21,16 +22,39 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
     lg: "h-20 w-20",
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        updateProfilePicture(base64String);
+  const handleTakePhoto = async () => {
+    try {
+      const image = await CapacitorCamera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera
+      });
+      
+      if (image.dataUrl) {
+        updateProfilePicture(image.dataUrl);
         setOpen(false);
-      };
-      reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error('Error taking photo:', error);
+    }
+  };
+
+  const handleSelectPhoto = async () => {
+    try {
+      const image = await CapacitorCamera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos
+      });
+      
+      if (image.dataUrl) {
+        updateProfilePicture(image.dataUrl);
+        setOpen(false);
+      }
+    } catch (error) {
+      console.error('Error selecting photo:', error);
     }
   };
 
@@ -71,27 +95,14 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
           )}
           <Button
             className="w-full justify-start bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all rounded-lg font-semibold"
-            onClick={() => {
-              const input = document.createElement("input");
-              input.type = "file";
-              input.accept = "image/*";
-              input.capture = "environment";
-              input.onchange = (e) => handleFileSelect(e as any);
-              input.click();
-            }}
+            onClick={handleTakePhoto}
           >
             <Camera className="mr-2 h-5 w-5" />
             Foto aufnehmen
           </Button>
           <Button
             className="w-full justify-start bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-all rounded-lg font-semibold"
-            onClick={() => {
-              const input = document.createElement("input");
-              input.type = "file";
-              input.accept = "image/*";
-              input.onchange = (e) => handleFileSelect(e as any);
-              input.click();
-            }}
+            onClick={handleSelectPhoto}
           >
             <ImageIcon className="mr-2 h-5 w-5" />
             Foto auswählen
