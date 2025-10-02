@@ -7,6 +7,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useThemeShop } from "@/contexts/ThemeShopContext";
 import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
+import { useTheme } from "@/contexts/ThemeContext";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
 import coinIcon from "@/assets/coin-icon.png";
@@ -23,6 +24,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   const { t } = useLanguage();
   const { currentUser, logout } = useAuth();
   const { resetTheme } = useThemeShop();
+  const { theme } = useTheme();
   const imageFilter = useThemeImageFilter();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,7 +61,9 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1"
+            className={`absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1 ${
+              theme === "light" ? "bg-muted" : ""
+            }`}
           >
             <img 
               src={qLogo} 
