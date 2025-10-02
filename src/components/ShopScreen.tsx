@@ -81,7 +81,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       </Button>
       
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 max-w-6xl py-8">
-        <h1 className="text-4xl font-bold text-foreground mb-8">🛒 Design Shop</h1>
+        <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-6 md:mb-8">🛒 Design Shop</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
           <div className="md:col-span-1 lg:col-span-2 grid grid-cols-1 gap-6">
@@ -93,13 +93,13 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             return (
               <Card 
                 key={theme.id} 
-                className="p-6 bg-card border-border cursor-pointer transition-all hover:border-primary"
+                className="p-4 md:p-6 bg-card border-border cursor-pointer transition-all hover:border-primary"
                 onMouseEnter={() => setPreviewTheme(theme.id)}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3 md:gap-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-bold text-card-foreground">{theme.name}</h3>
+                    <h3 className="text-lg md:text-xl font-bold text-card-foreground">{theme.name}</h3>
                     {isActive && (
                       <div className="flex items-center gap-1 text-success">
                         <Check className="w-5 h-5" />
@@ -108,7 +108,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                     )}
                   </div>
                   
-                  <div className={`h-24 rounded-lg ${theme.colorClass}`}></div>
+                  <div className={`h-16 md:h-24 rounded-lg ${theme.colorClass}`}></div>
                   
                   <div className="flex items-center gap-2">
                     <img src={coinIcon} alt="Coin" className="h-5 w-5 object-contain transition-all" style={{ filter: imageFilter }} />
