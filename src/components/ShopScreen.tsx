@@ -18,9 +18,17 @@ interface ShopScreenProps {
 const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
   const { t } = useLanguage();
   const [previewTheme, setPreviewTheme] = useState<ThemeStyle | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<ThemeStyle | null>(null);
   const { currentUser, addCoins } = useAuth();
   const { purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, getThemePrice } = useThemeShop();
   const imageFilter = useThemeImageFilter();
+
+  const handleCardHover = (theme: ThemeStyle) => {
+    setHoveredCard(theme);
+    setTimeout(() => {
+      setHoveredCard(null);
+    }, 2000);
+  };
 
   const themes: { id: ThemeStyle; name: string; colorClass: string }[] = [
     { id: "default", name: "Standard Style", colorClass: "bg-blue-600" },
@@ -106,12 +114,15 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             return (
               <Card 
                 key={theme.id} 
-                className="p-3 md:p-3 lg:p-4 bg-muted border-border cursor-pointer transition-all hover:border-primary"
-                onMouseEnter={() => setPreviewTheme(theme.id)}
+                className="p-3 md:p-3 lg:p-4 bg-muted border-border cursor-pointer transition-all hover:border-primary overflow-hidden"
+                onMouseEnter={() => {
+                  setPreviewTheme(theme.id);
+                  handleCardHover(theme.id);
+                }}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
-                <div className="flex flex-col md:flex-col gap-3">
-                  <div className="flex flex-col gap-2 md:gap-2 lg:gap-3">
+                <div className="flex md:flex-col gap-3 overflow-hidden">
+                  <div className={`flex flex-col gap-2 md:gap-2 lg:gap-3 min-w-full transition-transform duration-500 ${hoveredCard === theme.id ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}`}>
                     <div className="flex items-center justify-between">
                       <h3 className="text-base md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
                       {isActive && (
@@ -154,9 +165,9 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                     )}
                   </div>
 
-                  <div className="md:hidden overflow-x-auto">
+                  <div className={`md:hidden min-w-full transition-transform duration-500 ${hoveredCard === theme.id ? '-translate-x-full' : 'translate-x-0'}`}>
                     <div className={`preview-container theme-${theme.id}`}>
-                      <div className="p-3 rounded-lg bg-background min-w-[280px]">
+                      <div className="p-3 rounded-lg bg-background">
                         <h2 className="text-sm font-semibold text-foreground text-center mb-3">
                           Was ist die Hauptstadt von Deutschland?
                         </h2>
