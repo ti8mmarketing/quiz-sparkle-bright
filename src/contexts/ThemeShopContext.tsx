@@ -32,13 +32,18 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const storedPurchased = localStorage.getItem("quiz-purchased-themes");
-    if (storedPurchased) {
-      setPurchasedThemes(JSON.parse(storedPurchased));
-    }
+    const purchased = storedPurchased ? JSON.parse(storedPurchased) : ["default"];
+    setPurchasedThemes(purchased);
+    
     const storedActive = localStorage.getItem("quiz-active-theme");
-    if (storedActive) {
+    if (storedActive && purchased.includes(storedActive)) {
       setActiveThemeState(storedActive as ThemeStyle);
       applyTheme(storedActive as ThemeStyle);
+    } else {
+      // Reset to default if stored theme is not purchased
+      setActiveThemeState("default");
+      applyTheme("default");
+      localStorage.setItem("quiz-active-theme", "default");
     }
   }, []);
 
