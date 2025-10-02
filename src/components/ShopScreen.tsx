@@ -73,7 +73,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
       {currentUser && (
-        <div className="absolute right-4 top-[5rem] md:top-[5.5rem] flex items-center gap-2 text-foreground font-bold text-xl">
+        <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
           <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
