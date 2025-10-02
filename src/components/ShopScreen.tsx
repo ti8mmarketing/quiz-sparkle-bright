@@ -186,7 +186,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                   </div>
 
                   <div className={`md:hidden min-w-full transition-transform duration-500 ${hoveredCard === theme.id ? '-translate-x-full' : 'translate-x-0'}`}>
-                    <div className={`preview-container theme-${theme.id}`}>
+                    <div className={`preview-container theme-${theme.id === "default" ? "default" : theme.id}`}>
                       <div className="p-3 rounded-lg bg-background">
                         <h2 className="text-sm font-semibold text-foreground text-center mb-3">
                           Was ist die Hauptstadt von Deutschland?
@@ -222,7 +222,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
           <div className="hidden md:block lg:col-span-1">
             <Card className="p-3 md:p-4 lg:p-6 bg-muted border-border sticky top-4">
               <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-3 md:mb-4">Vorschau</h3>
-              <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
+              <div className={`preview-container ${previewTheme ? (previewTheme === "default" ? "theme-default" : `theme-${previewTheme}`) : 'theme-default'}`}>
                 <div className="p-3 md:p-4 rounded-lg bg-background">
                   <h2 className="text-base md:text-lg lg:text-2xl font-semibold text-foreground text-center mb-4 md:mb-6 lg:mb-8">
                     Was ist die Hauptstadt von Deutschland?
