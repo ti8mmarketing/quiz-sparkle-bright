@@ -124,7 +124,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                 <div className="flex md:flex-col gap-3 overflow-hidden">
                   <div className={`flex flex-col gap-2 md:gap-2 lg:gap-3 min-w-full transition-transform duration-500 ${hoveredCard === theme.id ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}`}>
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
+                      <h3 className="text-lg md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
                       {isActive && (
                         <div className="flex items-center gap-1 text-success">
                           <Check className="w-5 h-5 md:w-4 md:h-4" />
@@ -136,8 +136,8 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                     <div className={`h-24 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
                     
                     <div className="flex items-center gap-2 md:gap-1.5 lg:gap-2">
-                      <img src={coinIcon} alt="Coin" className="h-6 w-6 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
-                      <span className="text-2xl md:text-sm lg:text-base font-bold text-primary">{price}</span>
+                      <img src={coinIcon} alt="Coin" className="h-5 w-5 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
+                      <span className="text-lg md:text-sm lg:text-base font-bold text-primary">{price}</span>
                     </div>
 
                     {!isPurchased ? (
