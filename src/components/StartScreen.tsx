@@ -59,7 +59,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <Button
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-12 w-12 p-1"
+            className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1"
           >
             <img 
               src={qLogo} 
@@ -106,7 +106,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           onClick={onShop}
           variant="ghost"
           size="icon"
-          className="absolute left-4 bottom-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-12 w-12"
+          className="absolute left-4 bottom-4 text-foreground transition-all hover:scale-110 h-12 w-12"
         >
           <ShoppingCart className="h-10 w-10" />
         </Button>

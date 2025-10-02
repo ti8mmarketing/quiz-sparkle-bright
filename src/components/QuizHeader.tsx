@@ -29,7 +29,7 @@ const QuizHeader = ({
           onClick={onHome}
           variant="ghost"
           size="icon"
-          className="absolute left-4 top-4 text-foreground hover:bg-muted h-12 w-12"
+          className="absolute left-4 top-4 text-foreground h-12 w-12"
         >
           <Home className="h-8 w-8" />
         </Button>
@@ -45,7 +45,7 @@ const QuizHeader = ({
         onClick={onSettings}
         variant="ghost"
         size="icon"
-        className="absolute right-4 top-4 text-foreground hover:bg-muted transition-all hover:scale-110 h-12 w-12"
+        className="absolute right-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12"
       >
         <Settings className="h-10 w-10" />
       </Button>
