@@ -4,7 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { Camera, Image as ImageIcon, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
-import defaultAvatar from "@/assets/default-avatar.jpg";
+import defaultAvatar from "@/assets/default-avatar.png";
 
 interface ProfileAvatarProps {
   className?: string;
