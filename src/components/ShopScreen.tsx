@@ -25,9 +25,6 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
 
   const handleCardHover = (theme: ThemeStyle) => {
     setHoveredCard(theme);
-    setTimeout(() => {
-      setHoveredCard(null);
-    }, 2000);
   };
 
   const themes: { id: ThemeStyle; name: string; colorClass: string }[] = [
@@ -120,6 +117,13 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                   handleCardHover(theme.id);
                 }}
                 onMouseLeave={() => setPreviewTheme(null)}
+                onClick={() => {
+                  if (hoveredCard === theme.id) {
+                    setHoveredCard(null);
+                  } else {
+                    setHoveredCard(theme.id);
+                  }
+                }}
               >
                 <div className="flex md:flex-col gap-3 overflow-hidden">
                   <div className={`flex flex-col gap-2 md:gap-2 lg:gap-3 min-w-full transition-transform duration-500 ${hoveredCard === theme.id ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}`}>
