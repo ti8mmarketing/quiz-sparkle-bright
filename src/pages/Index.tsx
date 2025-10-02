@@ -7,8 +7,9 @@ import EndScreen from "@/components/EndScreen";
 import SettingsScreen from "@/components/SettingsScreen";
 import ShopScreen from "@/components/ShopScreen";
 import QuizHeader from "@/components/QuizHeader";
-import { questions } from "@/data/questions";
+import { getQuestionsByLanguage } from "@/data/questions";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
 import coinIcon from "@/assets/coin-icon.png";
 
@@ -17,6 +18,7 @@ type Difficulty = "easy" | "medium" | "hard";
 
 const Index = () => {
   const { addCoins, currentUser } = useAuth();
+  const { language } = useLanguage();
   const imageFilter = useThemeImageFilter();
   const navigate = useNavigate();
   const [currentScreen, setCurrentScreen] = useState<Screen>("start");
@@ -24,11 +26,12 @@ const Index = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
-  const [filteredQuestions, setFilteredQuestions] = useState(questions.filter(q => q.difficulty === "easy"));
+  const [filteredQuestions, setFilteredQuestions] = useState(getQuestionsByLanguage(language).filter(q => q.difficulty === "easy"));
 
   const handleStart = (selectedDifficulty: Difficulty) => {
     setDifficulty(selectedDifficulty);
-    const filtered = questions.filter(q => q.difficulty === selectedDifficulty);
+    const allQuestions = getQuestionsByLanguage(language);
+    const filtered = allQuestions.filter(q => q.difficulty === selectedDifficulty);
     setFilteredQuestions(filtered);
     setCurrentScreen("quiz");
     setCurrentQuestionIndex(0);
@@ -56,7 +59,8 @@ const Index = () => {
   };
 
   const handleRestart = () => {
-    const filtered = questions.filter(q => q.difficulty === difficulty);
+    const allQuestions = getQuestionsByLanguage(language);
+    const filtered = allQuestions.filter(q => q.difficulty === difficulty);
     setFilteredQuestions(filtered);
     setCurrentScreen("quiz");
     setCurrentQuestionIndex(0);
