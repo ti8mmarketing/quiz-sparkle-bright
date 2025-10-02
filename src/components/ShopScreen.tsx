@@ -124,26 +124,26 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                 <div className="flex md:flex-col gap-3 overflow-hidden">
                   <div className={`flex flex-col gap-2 md:gap-2 lg:gap-3 min-w-full transition-transform duration-500 ${hoveredCard === theme.id ? '-translate-x-full md:translate-x-0' : 'translate-x-0'}`}>
                     <div className="flex items-center justify-between">
-                      <h3 className="text-base md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
+                      <h3 className="text-xl md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
                       {isActive && (
                         <div className="flex items-center gap-1 text-success">
-                          <Check className="w-4 h-4" />
-                          <span className="text-xs font-semibold">Aktiv</span>
+                          <Check className="w-5 h-5 md:w-4 md:h-4" />
+                          <span className="text-sm md:text-xs font-semibold">Aktiv</span>
                         </div>
                       )}
                     </div>
                     
-                    <div className={`h-12 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
+                    <div className={`h-24 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
                     
-                    <div className="flex items-center gap-1 md:gap-1.5 lg:gap-2">
-                      <img src={coinIcon} alt="Coin" className="h-4 w-4 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
-                      <span className="text-base md:text-sm lg:text-base font-bold text-primary">{price}</span>
+                    <div className="flex items-center gap-2 md:gap-1.5 lg:gap-2">
+                      <img src={coinIcon} alt="Coin" className="h-6 w-6 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
+                      <span className="text-2xl md:text-sm lg:text-base font-bold text-primary">{price}</span>
                     </div>
 
                     {!isPurchased ? (
                       <Button
                         onClick={() => handlePurchase(theme.id)}
-                        className="w-full bg-secondary text-secondary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
+                        className="w-full bg-secondary text-secondary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                         disabled={!currentUser || currentUser.coins < price}
                       >
                         Kaufen
@@ -151,14 +151,14 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                     ) : !isActive ? (
                       <Button
                         onClick={() => handleActivate(theme.id)}
-                        className="w-full bg-primary text-primary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
+                        className="w-full bg-primary text-primary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                       >
                         Aktivieren
                       </Button>
                     ) : (
                       <Button
                         disabled
-                        className="w-full text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
+                        className="w-full text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                       >
                         Aktives Theme
                       </Button>
