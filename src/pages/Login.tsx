@@ -35,13 +35,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center relative">
-      <QuizHeader />
+    <div className="min-h-screen bg-background flex flex-col items-center">
+      <div className="border-b-4 bg-muted backdrop-blur w-full">
+        <QuizHeader />
+      </div>
       <Button
         onClick={() => navigate("/")}
         variant="ghost"
         size="icon"
-        className="absolute left-4 top-4 text-primary hover:text-primary/80 h-12 w-12 z-50"
+        className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 z-50"
       >
         <Home className="h-8 w-8" />
       </Button>
