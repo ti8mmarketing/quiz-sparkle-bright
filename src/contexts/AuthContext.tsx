@@ -27,10 +27,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedUsers) {
       setUsers(JSON.parse(storedUsers));
     }
-    const storedCurrentUser = localStorage.getItem("quiz-current-user");
-    if (storedCurrentUser) {
-      setCurrentUser(JSON.parse(storedCurrentUser));
-    }
   }, []);
 
   const signup = (username: string, password: string): boolean => {
@@ -48,7 +44,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const user = users.find(u => u.username === username && u.password === password);
     if (user) {
       setCurrentUser(user);
-      localStorage.setItem("quiz-current-user", JSON.stringify(user));
       return true;
     }
     return false;
@@ -70,7 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUsers(updatedUsers);
       
       localStorage.setItem("quiz-users", JSON.stringify(updatedUsers));
-      localStorage.setItem("quiz-current-user", JSON.stringify(updatedUser));
     }
   };
 
