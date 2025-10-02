@@ -53,16 +53,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const user = users.find(u => u.username === username && u.password === password);
     if (user) {
       setCurrentUser(user);
+      
+      // Load user's theme preferences
+      const userActiveTheme = localStorage.getItem(`quiz-active-theme-${username}`);
+      if (userActiveTheme) {
+        const root = document.documentElement;
+        root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
+        root.classList.add(`theme-${userActiveTheme}`);
+      }
+      
       return true;
     }
     return false;
   };
 
   const logout = () => {
+    const username = currentUser?.username;
     setCurrentUser(null);
-    localStorage.removeItem("quiz-current-user");
-    // Reset theme to default on logout
-    localStorage.setItem("quiz-active-theme", "default");
+    
+    // Keep theme data in localStorage for the user
+    // Only reset the visual theme to default
     const root = document.documentElement;
     root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
     root.classList.add("theme-default");

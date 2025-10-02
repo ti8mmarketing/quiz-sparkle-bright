@@ -31,14 +31,21 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
   const [activeTheme, setActiveThemeState] = useState<ThemeStyle>("default");
   const [currentUsername, setCurrentUsername] = useState<string>("");
 
+  // Listen to storage changes and login events
   useEffect(() => {
-    // Check if there's a logged in user
-    const user = localStorage.getItem("quiz-current-user");
-    const username = user ? JSON.parse(user).username : "";
-    setCurrentUsername(username);
+    const handleStorageChange = () => {
+      const usersData = localStorage.getItem("quiz-users");
+      if (usersData) {
+        const users = JSON.parse(usersData);
+        const currentUserData = users.find((u: any) => u.username === currentUsername);
+        
+        if (currentUserData && currentUsername) {
+          loadUserThemes(currentUsername);
+        }
+      }
+    };
 
-    if (username) {
-      // Load user-specific purchased themes
+    const loadUserThemes = (username: string) => {
       const userThemesKey = `quiz-purchased-themes-${username}`;
       const storedPurchased = localStorage.getItem(userThemesKey);
       const purchased = storedPurchased ? JSON.parse(storedPurchased) : ["default"];
@@ -53,13 +60,38 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
         setActiveThemeState("default");
         applyTheme("default");
       }
-    } else {
-      // No user logged in, reset to default
-      setPurchasedThemes(["default"]);
-      setActiveThemeState("default");
-      applyTheme("default");
-    }
-  }, []);
+    };
+
+    const checkCurrentUser = () => {
+      const usersData = localStorage.getItem("quiz-users");
+      if (usersData) {
+        const users = JSON.parse(usersData);
+        // Find currently logged in user by checking active theme
+        const activeUser = users.find((u: any) => {
+          const userActiveTheme = localStorage.getItem(`quiz-active-theme-${u.username}`);
+          return userActiveTheme !== null;
+        });
+        
+        if (activeUser) {
+          setCurrentUsername(activeUser.username);
+          loadUserThemes(activeUser.username);
+        } else {
+          // No user logged in
+          setPurchasedThemes(["default"]);
+          setActiveThemeState("default");
+          applyTheme("default");
+          setCurrentUsername("");
+        }
+      }
+    };
+
+    checkCurrentUser();
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [currentUsername]);
 
   const applyTheme = (theme: ThemeStyle) => {
     const root = document.documentElement;
