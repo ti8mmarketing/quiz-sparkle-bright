@@ -51,9 +51,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const login = (username: string, password: string): boolean => {
-    const user = users.find(u => u.username === username && u.password === password);
+    // Get fresh user data from localStorage to ensure we have latest coins
+    const storedUsers = localStorage.getItem("quiz-users");
+    const allUsers = storedUsers ? JSON.parse(storedUsers) : users;
+    
+    const user = allUsers.find((u: User) => u.username === username && u.password === password);
     if (user) {
       setCurrentUser(user);
+      
+      // Update users state with fresh data
+      setUsers(allUsers);
       
       // Load user's theme preferences
       const userActiveTheme = localStorage.getItem(`quiz-active-theme-${username}`);
