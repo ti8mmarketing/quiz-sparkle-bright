@@ -108,7 +108,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           size="icon"
           className="absolute left-4 bottom-4 text-foreground hover:bg-muted h-12 w-12"
         >
-          <ShoppingCart className="h-8 w-8" />
+          <ShoppingCart className="h-10 w-10" />
         </Button>
       )}
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 gap-8 bg-background">

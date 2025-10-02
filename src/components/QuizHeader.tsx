@@ -41,14 +41,14 @@ const QuizHeader = ({
         </div>
       )}
       {showSettingsButton && (
-        <Button
-          onClick={onSettings}
-          variant="ghost"
-          size="icon"
-          className="absolute right-4 top-4 text-foreground hover:bg-muted h-12 w-12"
-        >
-          <Settings className="h-8 w-8" />
-        </Button>
+      <Button
+        onClick={onSettings}
+        variant="ghost"
+        size="icon"
+        className="absolute right-4 top-4 text-foreground hover:bg-muted h-12 w-12"
+      >
+        <Settings className="h-10 w-10" />
+      </Button>
       )}
       <h1 className="text-center text-3xl font-bold text-primary">
         {t.appTitle}
