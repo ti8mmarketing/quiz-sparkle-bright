@@ -73,7 +73,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
     <div className="min-h-screen bg-background flex flex-col items-center">
       <QuizHeader onSettings={onSettings} />
       {currentUser && (
-        <div className="absolute right-4 top-[4.5rem] md:top-20 flex items-center gap-2 text-foreground font-bold text-xl">
+        <div className="absolute right-4 top-[5rem] md:top-[5.5rem] flex items-center gap-2 text-foreground font-bold text-xl">
           <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
           <span className="text-primary">{currentUser.coins}</span>
         </div>
@@ -150,7 +150,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
           })}
           </div>
           
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div className="hidden sm:block sm:col-span-2 lg:col-span-1">
             <Card className="p-4 md:p-6 bg-card border-border sticky top-4">
               <h3 className="text-xl font-bold text-card-foreground mb-4">Vorschau</h3>
               <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
