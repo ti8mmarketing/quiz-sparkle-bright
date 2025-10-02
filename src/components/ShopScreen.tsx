@@ -88,7 +88,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
         <QuizHeader onSettings={onSettings} />
         {currentUser && (
           <>
-            <ProfileAvatar className="absolute left-1/2 -translate-x-1/2 top-[8rem] md:left-4 md:translate-x-0 md:top-24 h-20 w-20 md:h-14 md:w-14" size="lg" />
+            <ProfileAvatar className="absolute left-1/2 -translate-x-1/2 top-[8rem] md:left-4 md:translate-x-0 md:top-[5.5rem] h-20 w-20 md:h-14 md:w-14" size="lg" />
             <div className="absolute right-4 top-[5.5rem] md:right-20 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
               <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
               <span className="text-primary">{currentUser.coins}</span>
