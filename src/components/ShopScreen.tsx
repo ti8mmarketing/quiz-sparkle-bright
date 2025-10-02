@@ -87,7 +87,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       </Button>
       
       <div className="flex-1 flex flex-col items-center justify-center w-full px-4 max-w-6xl py-8">
-        <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-6 md:mb-8">🛒 Design Shop</h1>
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 md:mb-8">🛒 Design Shop</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
           <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
@@ -99,32 +99,32 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             return (
               <Card 
                 key={theme.id} 
-                className="p-3 md:p-4 bg-card border-border cursor-pointer transition-all hover:border-primary"
+                className="p-3 md:p-3 lg:p-4 bg-card border-border cursor-pointer transition-all hover:border-primary"
                 onMouseEnter={() => setPreviewTheme(theme.id)}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
-                <div className="flex flex-col gap-2 md:gap-3">
+                <div className="flex flex-col gap-2 md:gap-2 lg:gap-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-base md:text-lg font-bold text-card-foreground">{theme.name}</h3>
+                    <h3 className="text-base md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
                     {isActive && (
                       <div className="flex items-center gap-1 text-success">
-                        <Check className="w-4 h-4 md:w-5 md:h-5" />
-                        <span className="text-xs md:text-sm font-semibold">Aktiv</span>
+                        <Check className="w-4 h-4" />
+                        <span className="text-xs font-semibold">Aktiv</span>
                       </div>
                     )}
                   </div>
                   
-                  <div className={`h-12 md:h-16 lg:h-20 rounded-lg ${theme.colorClass}`}></div>
+                  <div className={`h-12 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
                   
-                  <div className="flex items-center gap-2">
-                    <img src={coinIcon} alt="Coin" className="h-4 w-4 md:h-5 md:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
-                    <span className="text-base md:text-lg font-bold text-primary">{price}</span>
+                  <div className="flex items-center gap-1 md:gap-1.5 lg:gap-2">
+                    <img src={coinIcon} alt="Coin" className="h-4 w-4 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
+                    <span className="text-base md:text-sm lg:text-base font-bold text-primary">{price}</span>
                   </div>
 
                   {!isPurchased ? (
                     <Button
                       onClick={() => handlePurchase(theme.id)}
-                      className="w-full bg-secondary text-secondary-foreground text-sm md:text-base py-2 md:py-2.5"
+                      className="w-full bg-secondary text-secondary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
                       disabled={!currentUser || currentUser.coins < price}
                     >
                       Kaufen
@@ -132,14 +132,14 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                   ) : !isActive ? (
                     <Button
                       onClick={() => handleActivate(theme.id)}
-                      className="w-full bg-primary text-primary-foreground text-sm md:text-base py-2 md:py-2.5"
+                      className="w-full bg-primary text-primary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
                     >
                       Aktivieren
                     </Button>
                   ) : (
                     <Button
                       disabled
-                      className="w-full text-sm md:text-base py-2 md:py-2.5"
+                      className="w-full text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
                     >
                       Aktives Theme
                     </Button>
@@ -151,36 +151,36 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
           </div>
           
           <div className="hidden md:block md:col-span-1">
-            <Card className="p-4 md:p-6 bg-card border-border sticky top-4">
-              <h3 className="text-xl font-bold text-card-foreground mb-4">Vorschau</h3>
+            <Card className="p-3 md:p-4 lg:p-6 bg-card border-border sticky top-4">
+              <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-3 md:mb-4">Vorschau</h3>
               <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
-                <div className="p-4 rounded-lg bg-background border-2 border-border">
-                  <div className="text-center mb-4">
-                    <h2 className="text-2xl font-bold text-primary mb-2">Frage 1 von 20</h2>
-                    <p className="text-lg text-foreground">Was ist die Hauptstadt von Deutschland?</p>
+                <div className="p-3 md:p-4 rounded-lg bg-background border-2 border-border">
+                  <div className="text-center mb-3 md:mb-4">
+                    <h2 className="text-lg md:text-2xl font-bold text-primary mb-1 md:mb-2">Frage 1 von 20</h2>
+                    <p className="text-sm md:text-lg text-foreground">Was ist die Hauptstadt von Deutschland?</p>
                   </div>
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-md bg-muted text-muted-foreground border border-border">
+                  <div className="space-y-2 md:space-y-3">
+                    <div className="p-2 md:p-3 rounded-md bg-muted text-muted-foreground border border-border text-sm md:text-base">
                       Berlin
                     </div>
-                    <div className="p-3 rounded-md bg-muted text-muted-foreground border border-border">
+                    <div className="p-2 md:p-3 rounded-md bg-muted text-muted-foreground border border-border text-sm md:text-base">
                       München
                     </div>
-                    <div className="p-3 rounded-md bg-primary text-primary-foreground border border-primary">
+                    <div className="p-2 md:p-3 rounded-md bg-primary text-primary-foreground border border-primary text-sm md:text-base">
                       Hamburg
                     </div>
-                    <div className="p-3 rounded-md bg-muted text-muted-foreground border border-border">
+                    <div className="p-2 md:p-3 rounded-md bg-muted text-muted-foreground border border-border text-sm md:text-base">
                       Köln
                     </div>
                   </div>
-                  <div className="mt-4">
-                    <div className="h-10 rounded-md bg-secondary text-secondary-foreground flex items-center justify-center font-semibold">
+                  <div className="mt-3 md:mt-4">
+                    <div className="h-8 md:h-10 rounded-md bg-secondary text-secondary-foreground flex items-center justify-center font-semibold text-sm md:text-base">
                       Weiter
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground mt-4 text-center">
+              <p className="text-xs md:text-sm text-muted-foreground mt-3 md:mt-4 text-center">
                 Bewege die Maus über ein Design für eine Vorschau
               </p>
             </Card>
