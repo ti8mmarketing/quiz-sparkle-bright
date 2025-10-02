@@ -110,47 +110,78 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                 onMouseEnter={() => setPreviewTheme(theme.id)}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
-                <div className="flex flex-col gap-2 md:gap-2 lg:gap-3">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-base md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
-                    {isActive && (
-                      <div className="flex items-center gap-1 text-success">
-                        <Check className="w-4 h-4" />
-                        <span className="text-xs font-semibold">Aktiv</span>
-                      </div>
+                <div className="flex flex-col md:flex-col gap-3">
+                  <div className="flex flex-col gap-2 md:gap-2 lg:gap-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-base md:text-sm lg:text-lg font-bold text-card-foreground">{theme.name}</h3>
+                      {isActive && (
+                        <div className="flex items-center gap-1 text-success">
+                          <Check className="w-4 h-4" />
+                          <span className="text-xs font-semibold">Aktiv</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className={`h-12 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
+                    
+                    <div className="flex items-center gap-1 md:gap-1.5 lg:gap-2">
+                      <img src={coinIcon} alt="Coin" className="h-4 w-4 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
+                      <span className="text-base md:text-sm lg:text-base font-bold text-primary">{price}</span>
+                    </div>
+
+                    {!isPurchased ? (
+                      <Button
+                        onClick={() => handlePurchase(theme.id)}
+                        className="w-full bg-secondary text-secondary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
+                        disabled={!currentUser || currentUser.coins < price}
+                      >
+                        Kaufen
+                      </Button>
+                    ) : !isActive ? (
+                      <Button
+                        onClick={() => handleActivate(theme.id)}
+                        className="w-full bg-primary text-primary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
+                      >
+                        Aktivieren
+                      </Button>
+                    ) : (
+                      <Button
+                        disabled
+                        className="w-full text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
+                      >
+                        Aktives Theme
+                      </Button>
                     )}
                   </div>
-                  
-                  <div className={`h-12 md:h-12 lg:h-16 rounded-lg ${theme.colorClass}`}></div>
-                  
-                  <div className="flex items-center gap-1 md:gap-1.5 lg:gap-2">
-                    <img src={coinIcon} alt="Coin" className="h-4 w-4 md:h-4 md:w-4 lg:h-5 lg:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
-                    <span className="text-base md:text-sm lg:text-base font-bold text-primary">{price}</span>
-                  </div>
 
-                  {!isPurchased ? (
-                    <Button
-                      onClick={() => handlePurchase(theme.id)}
-                      className="w-full bg-secondary text-secondary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
-                      disabled={!currentUser || currentUser.coins < price}
-                    >
-                      Kaufen
-                    </Button>
-                  ) : !isActive ? (
-                    <Button
-                      onClick={() => handleActivate(theme.id)}
-                      className="w-full bg-primary text-primary-foreground text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
-                    >
-                      Aktivieren
-                    </Button>
-                  ) : (
-                    <Button
-                      disabled
-                      className="w-full text-sm md:text-xs lg:text-sm py-1.5 md:py-1.5 lg:py-2"
-                    >
-                      Aktives Theme
-                    </Button>
-                  )}
+                  <div className="md:hidden overflow-x-auto">
+                    <div className={`preview-container theme-${theme.id}`}>
+                      <div className="p-3 rounded-lg bg-background min-w-[280px]">
+                        <h2 className="text-sm font-semibold text-foreground text-center mb-3">
+                          Was ist die Hauptstadt von Deutschland?
+                        </h2>
+                        <div className="grid grid-cols-1 gap-2 mb-3">
+                          <Button className="bg-secondary text-secondary-foreground h-8 text-xs">
+                            Berlin
+                          </Button>
+                          <Button className="bg-secondary text-secondary-foreground h-8 text-xs">
+                            München
+                          </Button>
+                          <Button className="bg-secondary text-secondary-foreground h-8 text-xs">
+                            Hamburg
+                          </Button>
+                          <Button className="bg-secondary text-secondary-foreground h-8 text-xs">
+                            Köln
+                          </Button>
+                        </div>
+                        <div className="flex justify-center">
+                          <Button className="bg-muted text-foreground text-xs">
+                            {t.skip}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </Card>
             );
