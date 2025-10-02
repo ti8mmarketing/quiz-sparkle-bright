@@ -27,6 +27,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedUsers) {
       setUsers(JSON.parse(storedUsers));
     }
+    // Clear current user session on page reload
+    setCurrentUser(null);
   }, []);
 
   const signup = (username: string, password: string): boolean => {
@@ -52,6 +54,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setCurrentUser(null);
     localStorage.removeItem("quiz-current-user");
+    // Reset theme to default on logout
+    localStorage.setItem("quiz-active-theme", "default");
+    const root = document.documentElement;
+    root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
+    root.classList.add("theme-default");
   };
 
   const addCoins = (amount: number) => {
