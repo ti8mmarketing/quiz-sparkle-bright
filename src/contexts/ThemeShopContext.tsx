@@ -33,18 +33,6 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
 
   // Listen to storage changes and login events
   useEffect(() => {
-    const handleStorageChange = () => {
-      const usersData = localStorage.getItem("quiz-users");
-      if (usersData) {
-        const users = JSON.parse(usersData);
-        const currentUserData = users.find((u: any) => u.username === currentUsername);
-        
-        if (currentUserData && currentUsername) {
-          loadUserThemes(currentUsername);
-        }
-      }
-    };
-
     const loadUserThemes = (username: string) => {
       const userThemesKey = `quiz-purchased-themes-${username}`;
       const storedPurchased = localStorage.getItem(userThemesKey);
@@ -86,12 +74,20 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
     };
 
     checkCurrentUser();
-    window.addEventListener('storage', handleStorageChange);
+    
+    // Listen for custom events when user logs in/out
+    const handleUserChange = () => {
+      checkCurrentUser();
+    };
+    
+    window.addEventListener('user-login', handleUserChange);
+    window.addEventListener('user-logout', handleUserChange);
     
     return () => {
-      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('user-login', handleUserChange);
+      window.removeEventListener('user-logout', handleUserChange);
     };
-  }, [currentUsername]);
+  }, []);
 
   const applyTheme = (theme: ThemeStyle) => {
     const root = document.documentElement;

@@ -70,6 +70,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         root.classList.add(`theme-${userActiveTheme}`);
       }
       
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new Event('user-login'));
+      
       return true;
     }
     return false;
@@ -84,6 +87,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const root = document.documentElement;
     root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
     root.classList.add("theme-default");
+    
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new Event('user-logout'));
   };
 
   const addCoins = (amount: number) => {
