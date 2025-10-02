@@ -345,4 +345,22 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  button, h1, h2, h3, h4, h5, h6, p, span, div {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: default;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  input, textarea {
+    user-select: text;
+    -webkit-user-select: text;
+    cursor: text;
+  }
 }
