@@ -164,7 +164,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                         disabled
                         className="w-full text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                       >
-                        Aktives Theme
+                        Ausgerüstet
                       </Button>
                     )}
                   </div>
