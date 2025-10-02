@@ -23,12 +23,12 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
   const imageFilter = useThemeImageFilter();
 
   const themes: { id: ThemeStyle; name: string; colorClass: string }[] = [
-    { id: "default", name: "Standard Style", colorClass: "bg-blue-600" },
-    { id: "pink", name: "Pink Style", colorClass: "bg-pink-500" },
-    { id: "green", name: "Grüner Style", colorClass: "bg-green-500" },
-    { id: "orange", name: "Oranger Style", colorClass: "bg-orange-500" },
-    { id: "blue", name: "Hellblauer Style", colorClass: "bg-cyan-400" },
-    { id: "purple", name: "Lila Style", colorClass: "bg-purple-500" },
+    { id: "default", name: "Standard Style", colorClass: "bg-blue-950/80" },
+    { id: "pink", name: "Pink Style", colorClass: "bg-pink-950/80" },
+    { id: "green", name: "Grüner Style", colorClass: "bg-green-950/80" },
+    { id: "orange", name: "Oranger Style", colorClass: "bg-orange-950/80" },
+    { id: "blue", name: "Hellblauer Style", colorClass: "bg-cyan-950/80" },
+    { id: "purple", name: "Lila Style", colorClass: "bg-purple-950/80" },
   ];
 
   const handlePurchase = (theme: ThemeStyle) => {
@@ -83,7 +83,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       <Button
         onClick={onBack}
         variant="ghost"
-        className="absolute left-4 top-4 text-foreground hover:bg-muted"
+        className="absolute left-4 top-4 text-foreground hover:bg-muted transition-transform duration-200 hover:scale-110"
       >
         ← Zurück
       </Button>
