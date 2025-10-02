@@ -64,7 +64,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
             <img 
               src={qLogo} 
               alt="Q Logo" 
-              className="h-10 w-10 object-contain transition-all mix-blend-lighten dark:mix-blend-normal"
+              className="h-10 w-10 object-contain transition-all dark:invert-0 invert"
               style={{ filter: imageFilter }}
             />
           </Button>
