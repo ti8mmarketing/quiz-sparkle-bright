@@ -144,7 +144,23 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                       <span className="text-lg md:text-sm lg:text-base font-bold text-primary">{price}</span>
                     </div>
 
-                    {!isPurchased ? (
+                    {theme.id === "default" ? (
+                      isActive ? (
+                        <Button
+                          disabled
+                          className="w-full text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
+                        >
+                          Ausgerüstet
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => handleActivate(theme.id)}
+                          className="w-full bg-primary text-primary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
+                        >
+                          Aktivieren
+                        </Button>
+                      )
+                    ) : !isPurchased ? (
                       <Button
                         onClick={() => handlePurchase(theme.id)}
                         className="w-full bg-secondary text-secondary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
