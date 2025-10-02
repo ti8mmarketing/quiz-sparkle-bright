@@ -219,6 +219,122 @@ All colors MUST be HSL.
     --input: 271 70% 18%;
     --ring: 271 81% 60%;
   }
+
+  .theme-red {
+    --background: 0 84% 10%;
+    --foreground: 0 0% 100%;
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 70% 50%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 75% 18%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 0 84% 70%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 75% 18%;
+    --input: 0 75% 18%;
+    --ring: 0 84% 60%;
+  }
+
+  .light.theme-red {
+    --background: 0 0% 100%;
+    --foreground: 0 84% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 84% 10%;
+    --primary: 0 84% 60%;
+    --muted: 0 20% 96%;
+    --muted-foreground: 0 30% 40%;
+    --border: 0 20% 91%;
+    --input: 0 20% 91%;
+    --ring: 0 84% 60%;
+  }
+
+  .theme-yellow {
+    --background: 45 93% 10%;
+    --foreground: 0 0% 100%;
+    --primary: 45 93% 55%;
+    --primary-foreground: 45 93% 10%;
+    --secondary: 45 80% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 45 85% 18%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 45 93% 65%;
+    --accent-foreground: 45 93% 10%;
+    --border: 45 85% 18%;
+    --input: 45 85% 18%;
+    --ring: 45 93% 55%;
+  }
+
+  .light.theme-yellow {
+    --background: 0 0% 100%;
+    --foreground: 45 93% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 45 93% 10%;
+    --primary: 45 93% 55%;
+    --muted: 45 20% 96%;
+    --muted-foreground: 45 30% 40%;
+    --border: 45 20% 91%;
+    --input: 45 20% 91%;
+    --ring: 45 93% 55%;
+  }
+
+  .theme-teal {
+    --background: 180 84% 10%;
+    --foreground: 0 0% 100%;
+    --primary: 180 84% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 180 75% 18%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 180 84% 65%;
+    --accent-foreground: 0 0% 100%;
+    --border: 180 75% 18%;
+    --input: 180 75% 18%;
+    --ring: 180 84% 55%;
+  }
+
+  .light.theme-teal {
+    --background: 0 0% 100%;
+    --foreground: 180 84% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 180 84% 10%;
+    --primary: 180 84% 55%;
+    --muted: 180 20% 96%;
+    --muted-foreground: 180 30% 40%;
+    --border: 180 20% 91%;
+    --input: 180 20% 91%;
+    --ring: 180 84% 55%;
+  }
+
+  .theme-indigo {
+    --background: 243 75% 10%;
+    --foreground: 0 0% 100%;
+    --primary: 243 75% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 243 60% 49%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 243 70% 18%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 243 75% 69%;
+    --accent-foreground: 0 0% 100%;
+    --border: 243 70% 18%;
+    --input: 243 70% 18%;
+    --ring: 243 75% 59%;
+  }
+
+  .light.theme-indigo {
+    --background: 0 0% 100%;
+    --foreground: 243 75% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 243 75% 10%;
+    --primary: 243 75% 59%;
+    --muted: 243 20% 96%;
+    --muted-foreground: 243 30% 40%;
+    --border: 243 20% 91%;
+    --input: 243 20% 91%;
+    --ring: 243 75% 59%;
+  }
 }
 
 @layer base {
