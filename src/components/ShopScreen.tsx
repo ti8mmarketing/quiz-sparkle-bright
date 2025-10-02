@@ -21,7 +21,7 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
   const [previewTheme, setPreviewTheme] = useState<ThemeStyle | null>(null);
   const [hoveredCard, setHoveredCard] = useState<ThemeStyle | null>(null);
   const { currentUser, addCoins } = useAuth();
-  const { purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, getThemePrice } = useThemeShop();
+  const { purchasedThemes, activeTheme, purchaseTheme, setActiveTheme, getThemePrice, saveUserProgress } = useThemeShop();
   const imageFilter = useThemeImageFilter();
 
   const handleCardHover = (theme: ThemeStyle) => {
@@ -93,7 +93,10 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
         )}
       </div>
       <Button
-        onClick={onBack}
+        onClick={() => {
+          saveUserProgress(); // Save before going back
+          onBack();
+        }}
         variant="ghost"
         size="icon"
         className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12"
