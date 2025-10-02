@@ -7,10 +7,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useThemeShop } from "@/contexts/ThemeShopContext";
 import { useThemeImageFilter } from "@/hooks/useThemeImageFilter";
-import { useTheme } from "@/contexts/ThemeContext";
 import quizLogo from "@/assets/quiz-logo.png";
 import qLogo from "@/assets/q-logo.png";
-import qLogoLight from "@/assets/q-logo-light.png";
 import coinIcon from "@/assets/coin-icon.png";
 
 interface StartScreenProps {
@@ -25,7 +23,6 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
   const { t } = useLanguage();
   const { currentUser, logout } = useAuth();
   const { resetTheme } = useThemeShop();
-  const { theme } = useTheme();
   const imageFilter = useThemeImageFilter();
   const [selectedDifficulty, setSelectedDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,15 +59,13 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <Button
             variant="ghost"
             size="icon"
-            className={`absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1 ${
-              theme === "light" ? "bg-background/80 hover:bg-background" : ""
-            }`}
+            className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1"
           >
             <img 
-              src={theme === "light" ? qLogoLight : qLogo} 
+              src={qLogo} 
               alt="Q Logo" 
               className="h-10 w-10 object-contain transition-all"
-              style={{ filter: theme === "light" ? "none" : imageFilter }}
+              style={{ filter: imageFilter }}
             />
           </Button>
         </SheetTrigger>
