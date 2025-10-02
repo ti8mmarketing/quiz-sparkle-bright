@@ -99,32 +99,32 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             return (
               <Card 
                 key={theme.id} 
-                className="p-3 md:p-6 bg-card border-border cursor-pointer transition-all hover:border-primary"
+                className="p-3 md:p-4 bg-card border-border cursor-pointer transition-all hover:border-primary"
                 onMouseEnter={() => setPreviewTheme(theme.id)}
                 onMouseLeave={() => setPreviewTheme(null)}
               >
-                <div className="flex flex-col gap-2 md:gap-4">
+                <div className="flex flex-col gap-2 md:gap-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-base md:text-xl font-bold text-card-foreground">{theme.name}</h3>
+                    <h3 className="text-base md:text-lg font-bold text-card-foreground">{theme.name}</h3>
                     {isActive && (
                       <div className="flex items-center gap-1 text-success">
-                        <Check className="w-5 h-5" />
-                        <span className="text-sm font-semibold">Aktiv</span>
+                        <Check className="w-4 h-4 md:w-5 md:h-5" />
+                        <span className="text-xs md:text-sm font-semibold">Aktiv</span>
                       </div>
                     )}
                   </div>
                   
-                  <div className={`h-12 md:h-24 rounded-lg ${theme.colorClass}`}></div>
+                  <div className={`h-12 md:h-16 lg:h-20 rounded-lg ${theme.colorClass}`}></div>
                   
                   <div className="flex items-center gap-2">
-                    <img src={coinIcon} alt="Coin" className="h-5 w-5 object-contain transition-all" style={{ filter: imageFilter }} />
-                    <span className="text-lg font-bold text-primary">{price}</span>
+                    <img src={coinIcon} alt="Coin" className="h-4 w-4 md:h-5 md:w-5 object-contain transition-all" style={{ filter: imageFilter }} />
+                    <span className="text-base md:text-lg font-bold text-primary">{price}</span>
                   </div>
 
                   {!isPurchased ? (
                     <Button
                       onClick={() => handlePurchase(theme.id)}
-                      className="w-full bg-secondary text-secondary-foreground"
+                      className="w-full bg-secondary text-secondary-foreground text-sm md:text-base py-2 md:py-2.5"
                       disabled={!currentUser || currentUser.coins < price}
                     >
                       Kaufen
@@ -132,14 +132,14 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                   ) : !isActive ? (
                     <Button
                       onClick={() => handleActivate(theme.id)}
-                      className="w-full bg-primary text-primary-foreground"
+                      className="w-full bg-primary text-primary-foreground text-sm md:text-base py-2 md:py-2.5"
                     >
                       Aktivieren
                     </Button>
                   ) : (
                     <Button
                       disabled
-                      className="w-full"
+                      className="w-full text-sm md:text-base py-2 md:py-2.5"
                     >
                       Aktives Theme
                     </Button>
