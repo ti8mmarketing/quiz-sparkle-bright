@@ -57,12 +57,12 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
           </Avatar>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-64 p-2">
-        <div className="flex flex-col gap-1">
+      <PopoverContent className="w-64 p-3 bg-popover border-2 border-border shadow-xl">
+        <div className="flex flex-col gap-2">
           {currentUser.profilePicture && (
             <Button
               variant="ghost"
-              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/20 transition-all rounded-lg"
               onClick={handleDeletePhoto}
             >
               <X className="mr-2 h-4 w-4" />
@@ -71,7 +71,7 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
           )}
           <Button
             variant="ghost"
-            className="w-full justify-start"
+            className="w-full justify-start hover:bg-primary/20 hover:text-primary transition-all rounded-lg"
             onClick={() => {
               const input = document.createElement("input");
               input.type = "file";
@@ -86,7 +86,7 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start"
+            className="w-full justify-start hover:bg-primary/20 hover:text-primary transition-all rounded-lg"
             onClick={() => {
               const input = document.createElement("input");
               input.type = "file";
@@ -100,7 +100,7 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start"
+            className="w-full justify-start hover:bg-muted transition-all rounded-lg"
             onClick={() => setOpen(false)}
           >
             Abbrechen
