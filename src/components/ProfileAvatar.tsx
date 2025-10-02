@@ -57,21 +57,21 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
           </Avatar>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-64 p-3 bg-popover border-2 border-border shadow-xl">
+      <PopoverContent className="w-64 p-3 bg-card border-2 border-primary/30 shadow-2xl rounded-xl backdrop-blur-sm">
         <div className="flex flex-col gap-2">
           {currentUser.profilePicture && (
             <Button
               variant="ghost"
-              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/20 transition-all rounded-lg"
+              className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/20 transition-all rounded-lg font-medium"
               onClick={handleDeletePhoto}
             >
-              <X className="mr-2 h-4 w-4" />
+              <X className="mr-2 h-5 w-5" />
               Foto löschen
             </Button>
           )}
           <Button
             variant="ghost"
-            className="w-full justify-start hover:bg-primary/20 hover:text-primary transition-all rounded-lg"
+            className="w-full justify-start text-foreground hover:bg-primary/30 hover:text-primary transition-all rounded-lg font-medium"
             onClick={() => {
               const input = document.createElement("input");
               input.type = "file";
@@ -81,12 +81,12 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
               input.click();
             }}
           >
-            <Camera className="mr-2 h-4 w-4" />
+            <Camera className="mr-2 h-5 w-5" />
             Foto aufnehmen
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start hover:bg-primary/20 hover:text-primary transition-all rounded-lg"
+            className="w-full justify-start text-foreground hover:bg-primary/30 hover:text-primary transition-all rounded-lg font-medium"
             onClick={() => {
               const input = document.createElement("input");
               input.type = "file";
@@ -95,12 +95,12 @@ const ProfileAvatar = ({ className = "", size = "md" }: ProfileAvatarProps) => {
               input.click();
             }}
           >
-            <ImageIcon className="mr-2 h-4 w-4" />
+            <ImageIcon className="mr-2 h-5 w-5" />
             Foto auswählen
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start hover:bg-muted transition-all rounded-lg"
+            className="w-full justify-start text-muted-foreground hover:bg-muted hover:text-foreground transition-all rounded-lg font-medium"
             onClick={() => setOpen(false)}
           >
             Abbrechen
