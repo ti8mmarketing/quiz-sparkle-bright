@@ -29,6 +29,16 @@ const Index = () => {
   const [filteredQuestions, setFilteredQuestions] = useState(getQuestionsByLanguage(language).filter(q => q.difficulty === "easy"));
   const [coinPop, setCoinPop] = useState(false);
 
+  // Shuffle function to randomize questions
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   useEffect(() => {
     if (coinPop) {
       const timer = setTimeout(() => setCoinPop(false), 300);
@@ -40,7 +50,8 @@ const Index = () => {
     setDifficulty(selectedDifficulty);
     const allQuestions = getQuestionsByLanguage(language);
     const filtered = allQuestions.filter(q => q.difficulty === selectedDifficulty);
-    setFilteredQuestions(filtered);
+    const shuffled = shuffleArray(filtered);
+    setFilteredQuestions(shuffled);
     setCurrentScreen("quiz");
     setCurrentQuestionIndex(0);
     setScore(0);
@@ -70,7 +81,8 @@ const Index = () => {
   const handleRestart = () => {
     const allQuestions = getQuestionsByLanguage(language);
     const filtered = allQuestions.filter(q => q.difficulty === difficulty);
-    setFilteredQuestions(filtered);
+    const shuffled = shuffleArray(filtered);
+    setFilteredQuestions(shuffled);
     setCurrentScreen("quiz");
     setCurrentQuestionIndex(0);
     setScore(0);
