@@ -40,7 +40,8 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
     { id: "indigo", name: "Indigo Style", colorClass: "bg-indigo-600" },
   ];
 
-  const handlePurchase = (theme: ThemeStyle) => {
+  const handlePurchase = (theme: ThemeStyle, e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!currentUser) {
       toast({
         title: "Nicht eingeloggt",
@@ -70,11 +71,12 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
     }
   };
 
-  const handleActivate = (theme: ThemeStyle) => {
+  const handleActivate = (theme: ThemeStyle, e: React.MouseEvent) => {
+    e.stopPropagation();
     setActiveTheme(theme);
     toast({
-      title: "Theme aktiviert!",
-      description: `Das ${theme} Theme wurde aktiviert.`,
+      title: "Theme ausgerüstet!",
+      description: `Das ${theme} Theme wurde ausgerüstet.`,
     });
   };
 
@@ -154,15 +156,15 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                         </Button>
                       ) : (
                         <Button
-                          onClick={() => handleActivate(theme.id)}
+                          onClick={(e) => handleActivate(theme.id, e)}
                           className="w-full bg-primary text-primary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                         >
-                          Aktivieren
+                          Ausrüsten
                         </Button>
                       )
                     ) : !isPurchased ? (
                       <Button
-                        onClick={() => handlePurchase(theme.id)}
+                        onClick={(e) => handlePurchase(theme.id, e)}
                         className="w-full bg-secondary text-secondary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                         disabled={!currentUser || currentUser.coins < price}
                       >
@@ -170,10 +172,10 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
                       </Button>
                     ) : !isActive ? (
                       <Button
-                        onClick={() => handleActivate(theme.id)}
+                        onClick={(e) => handleActivate(theme.id, e)}
                         className="w-full bg-primary text-primary-foreground text-base md:text-xs lg:text-sm py-3 md:py-1.5 lg:py-2"
                       >
-                        Aktivieren
+                        Ausrüsten
                       </Button>
                     ) : (
                       <Button
