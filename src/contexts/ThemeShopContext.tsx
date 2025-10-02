@@ -46,9 +46,11 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
       if (storedActive && purchased.includes(storedActive)) {
         setActiveThemeState(storedActive as ThemeStyle);
         applyTheme(storedActive as ThemeStyle);
+        console.log(`🎨 Theme restored for ${username}: ${storedActive}`);
       } else {
         setActiveThemeState("default");
         applyTheme("default");
+        console.log(`🎨 No saved theme for ${username}, using default`);
       }
     };
 
@@ -63,34 +65,21 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
         return;
       }
       
-      const users = JSON.parse(usersData);
-      
-      // First try to find user with active theme (logged in user)
-      let activeUser = users.find((u: any) => {
-        const userActiveTheme = localStorage.getItem(`quiz-active-theme-${u.username}`);
-        return userActiveTheme !== null;
-      });
-      
-      // If no user found by theme, check AuthContext current user
-      if (!activeUser) {
-        const authUsersStr = localStorage.getItem("quiz-users");
-        if (authUsersStr) {
-          const authUsers = JSON.parse(authUsersStr);
-          // Try to find user by checking if they were recently active
-          activeUser = authUsers[authUsers.length - 1]; // Last user in array might be current
-        }
+      // Check if there's a username we should load themes for
+      // This will be set by the user-login event
+      const storageEvent = (window as any).__lastLoginUsername;
+      if (storageEvent) {
+        loadUserThemes(storageEvent);
+        delete (window as any).__lastLoginUsername;
+        return;
       }
       
-      if (activeUser) {
-        loadUserThemes(activeUser.username);
-      } else {
-        // No active user - apply default theme
-        setPurchasedThemes(["default"]);
-        setActiveThemeState("default");
-        applyTheme("default");
-        setCurrentUsername("");
-        console.log("🔄 No active user - reset to default theme");
-      }
+      // Fallback: no active user
+      setPurchasedThemes(["default"]);
+      setActiveThemeState("default");
+      applyTheme("default");
+      setCurrentUsername("");
+      console.log("🔄 No active user - reset to default theme");
     };
 
     checkCurrentUser();
