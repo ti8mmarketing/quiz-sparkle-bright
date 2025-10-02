@@ -68,7 +68,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
               src={theme === "light" ? qLogoLight : qLogo} 
               alt="Q Logo" 
               className="h-10 w-10 object-contain transition-all"
-              style={{ filter: imageFilter }}
+              style={{ filter: theme === "light" ? `${imageFilter} contrast(1.15) brightness(0.95) drop-shadow(0 0 1.5px hsl(var(--primary)))` : imageFilter }}
             />
           </Button>
         </SheetTrigger>
