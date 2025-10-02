@@ -5,16 +5,18 @@ interface User {
   password: string;
   coins: number;
   activeTheme?: string;
+  profilePicture?: string;
 }
 
 interface AuthContextType {
   currentUser: User | null;
   users: User[];
   login: (username: string, password: string) => boolean;
-  signup: (username: string, password: string) => boolean;
+  signup: (username: string, password: string, profilePicture?: string) => boolean;
   logout: () => void;
   addCoins: (amount: number) => void;
   deleteAccount: (password: string) => boolean;
+  updateProfilePicture: (profilePicture: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -36,11 +38,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     console.log("🔄 Page reload - reset to default theme");
   }, []);
 
-  const signup = (username: string, password: string): boolean => {
+  const signup = (username: string, password: string, profilePicture?: string): boolean => {
     if (users.some(u => u.username === username)) {
       return false;
     }
-    const newUser: User = { username, password, coins: 0 };
+    const newUser: User = { username, password, coins: 0, profilePicture };
     const updatedUsers = [...users, newUser];
     setUsers(updatedUsers);
     localStorage.setItem("quiz-users", JSON.stringify(updatedUsers));
@@ -147,8 +149,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
+  const updateProfilePicture = (profilePicture: string) => {
+    if (currentUser) {
+      const updatedUser = { ...currentUser, profilePicture };
+      setCurrentUser(updatedUser);
+      
+      const updatedUsers = users.map(u => 
+        u.username === currentUser.username ? updatedUser : u
+      );
+      setUsers(updatedUsers);
+      
+      localStorage.setItem("quiz-users", JSON.stringify(updatedUsers));
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ currentUser, users, login, signup, logout, addCoins, deleteAccount }}>
+    <AuthContext.Provider value={{ currentUser, users, login, signup, logout, addCoins, deleteAccount, updateProfilePicture }}>
       {children}
     </AuthContext.Provider>
   );

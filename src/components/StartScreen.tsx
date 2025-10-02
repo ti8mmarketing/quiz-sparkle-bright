@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ShoppingCart } from "lucide-react";
 import QuizHeader from "./QuizHeader";
+import ProfileAvatar from "./ProfileAvatar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useThemeShop } from "@/contexts/ThemeShopContext";
@@ -99,10 +100,13 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
         <div className="border-b-4 bg-muted backdrop-blur">
           <QuizHeader onSettings={onSettings} />
           {currentUser && (
-            <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
-              <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
-              <span className="text-primary">{currentUser.coins}</span>
-            </div>
+            <>
+              <ProfileAvatar className="absolute left-4 top-[5.5rem] md:left-4 md:top-20" size="md" />
+              <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
+                <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+                <span className="text-primary">{currentUser.coins}</span>
+              </div>
+            </>
           )}
         </div>
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -166,7 +170,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
             onClick={onShop}
             variant="ghost"
             size="icon"
-            className="absolute left-4 top-[5.5rem] md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
+            className="absolute left-4 top-[9.5rem] md:left-4 md:bottom-4 md:top-auto text-foreground transition-all hover:scale-110 h-12 w-12"
           >
             <ShoppingCart className="h-10 w-10" />
           </Button>

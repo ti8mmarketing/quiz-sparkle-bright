@@ -3,6 +3,7 @@ import type React from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import QuizHeader from "./QuizHeader";
+import ProfileAvatar from "./ProfileAvatar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useThemeShop, ThemeStyle } from "@/contexts/ThemeShopContext";
@@ -86,10 +87,13 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
       <div className="border-b-4 bg-muted backdrop-blur w-full">
         <QuizHeader onSettings={onSettings} />
         {currentUser && (
-          <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
-            <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
-            <span className="text-primary">{currentUser.coins}</span>
-          </div>
+          <>
+            <ProfileAvatar className="absolute left-4 top-[5.5rem] md:left-4 md:top-20" size="md" />
+            <div className="absolute right-4 top-[5.5rem] md:right-28 md:top-4 flex items-center gap-2 text-foreground font-bold text-xl">
+              <img src={coinIcon} alt="Coin" className="h-8 w-8 object-contain transition-all" style={{ filter: imageFilter }} />
+              <span className="text-primary">{currentUser.coins}</span>
+            </div>
+          </>
         )}
       </div>
       <Button
