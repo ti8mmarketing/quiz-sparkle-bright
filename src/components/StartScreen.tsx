@@ -62,9 +62,7 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
           <Button
             variant="ghost"
             size="icon"
-            className={`absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1 ${
-              theme === "light" ? "bg-muted" : ""
-            }`}
+            className="absolute left-4 top-4 text-foreground transition-all hover:scale-110 h-12 w-12 p-1"
           >
             <img 
               src={theme === "light" ? qLogoLight : qLogo} 
