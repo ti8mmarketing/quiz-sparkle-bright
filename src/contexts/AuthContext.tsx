@@ -39,6 +39,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const updatedUsers = [...users, newUser];
     setUsers(updatedUsers);
     localStorage.setItem("quiz-users", JSON.stringify(updatedUsers));
+    
+    // If Admin account, unlock all themes
+    if (username === "Admin" && password === "Admin") {
+      const allThemes = ["default", "pink", "green", "orange", "blue", "purple", "red", "yellow", "teal", "indigo"];
+      localStorage.setItem("quiz-purchased-themes-Admin", JSON.stringify(allThemes));
+    }
+    
     return true;
   };
 
