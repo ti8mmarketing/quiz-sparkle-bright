@@ -146,8 +146,8 @@ const StartScreen = ({ onStart, onSettings, onShop, onNavigateToLogin, onNavigat
                   </Button>
                   <Button 
                     onClick={handleDeleteClick}
-                    variant="destructive"
-                    className="w-full bg-red-600 hover:bg-red-700"
+                    variant="outline"
+                    className="w-full text-destructive border-destructive hover:bg-destructive/10"
                   >
                     Account löschen
                   </Button>
