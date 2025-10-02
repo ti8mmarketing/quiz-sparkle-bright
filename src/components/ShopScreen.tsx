@@ -154,29 +154,28 @@ const ShopScreen = ({ onBack, onSettings }: ShopScreenProps) => {
             <Card className="p-3 md:p-4 lg:p-6 bg-card border-border sticky top-4">
               <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-3 md:mb-4">Vorschau</h3>
               <div className={`preview-container ${previewTheme ? `theme-${previewTheme}` : ''}`}>
-                <div className="p-3 md:p-4 rounded-lg bg-background border-2 border-border">
-                  <div className="text-center mb-3 md:mb-4">
-                    <h2 className="text-lg md:text-2xl font-bold text-primary mb-1 md:mb-2">Frage 1 von 20</h2>
-                    <p className="text-sm md:text-lg text-foreground">Was ist die Hauptstadt von Deutschland?</p>
-                  </div>
-                  <div className="space-y-2 md:space-y-3">
-                    <div className="p-2 md:p-3 rounded-md bg-muted text-muted-foreground border border-border text-sm md:text-base">
+                <div className="p-3 md:p-4 rounded-lg bg-background">
+                  <h2 className="text-xl md:text-2xl font-semibold text-foreground text-center mb-6 md:mb-8">
+                    Was ist die Hauptstadt von Deutschland?
+                  </h2>
+                  <div className="grid grid-cols-1 gap-3 md:gap-4 mb-4 md:mb-6">
+                    <Button className="bg-secondary text-secondary-foreground h-12 md:h-16 text-base md:text-lg">
                       Berlin
-                    </div>
-                    <div className="p-2 md:p-3 rounded-md bg-muted text-muted-foreground border border-border text-sm md:text-base">
+                    </Button>
+                    <Button className="bg-secondary text-secondary-foreground h-12 md:h-16 text-base md:text-lg">
                       München
-                    </div>
-                    <div className="p-2 md:p-3 rounded-md bg-primary text-primary-foreground border border-primary text-sm md:text-base">
+                    </Button>
+                    <Button className="bg-secondary text-secondary-foreground h-12 md:h-16 text-base md:text-lg">
                       Hamburg
-                    </div>
-                    <div className="p-2 md:p-3 rounded-md bg-muted text-muted-foreground border border-border text-sm md:text-base">
+                    </Button>
+                    <Button className="bg-secondary text-secondary-foreground h-12 md:h-16 text-base md:text-lg">
                       Köln
-                    </div>
+                    </Button>
                   </div>
-                  <div className="mt-3 md:mt-4">
-                    <div className="h-8 md:h-10 rounded-md bg-secondary text-secondary-foreground flex items-center justify-center font-semibold text-sm md:text-base">
-                      Weiter
-                    </div>
+                  <div className="flex justify-center">
+                    <Button className="bg-muted text-foreground">
+                      {t.skip}
+                    </Button>
                   </div>
                 </div>
               </div>
