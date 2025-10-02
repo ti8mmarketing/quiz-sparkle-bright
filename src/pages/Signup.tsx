@@ -9,7 +9,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import QuizHeader from "@/components/QuizHeader";
 import { useToast } from "@/hooks/use-toast";
 import { Home, Camera, Image as ImageIcon } from "lucide-react";
-import defaultAvatar from "@/assets/default-avatar.jpg";
+import defaultAvatar from "@/assets/default-avatar.png";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
