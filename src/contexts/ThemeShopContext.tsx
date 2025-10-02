@@ -59,6 +59,7 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
         setActiveThemeState("default");
         applyTheme("default");
         setCurrentUsername("");
+        console.log("🔄 No users found - reset to default theme");
         return;
       }
       
@@ -83,10 +84,12 @@ export const ThemeShopProvider = ({ children }: { children: ReactNode }) => {
       if (activeUser) {
         loadUserThemes(activeUser.username);
       } else {
+        // No active user - apply default theme
         setPurchasedThemes(["default"]);
         setActiveThemeState("default");
         applyTheme("default");
         setCurrentUsername("");
+        console.log("🔄 No active user - reset to default theme");
       }
     };
 

@@ -28,8 +28,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedUsers) {
       setUsers(JSON.parse(storedUsers));
     }
-    // Clear current user session on page reload
+    // Clear current user session on page reload and reset to default theme
     setCurrentUser(null);
+    const root = document.documentElement;
+    root.classList.remove("theme-default", "theme-pink", "theme-green", "theme-orange", "theme-blue", "theme-purple", "theme-red", "theme-yellow", "theme-teal", "theme-indigo");
+    root.classList.add("theme-default");
+    console.log("🔄 Page reload - reset to default theme");
   }, []);
 
   const signup = (username: string, password: string): boolean => {
